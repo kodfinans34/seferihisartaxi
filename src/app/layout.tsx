@@ -13,9 +13,32 @@ const inter = Inter({
 import { MobileBottomBar } from "@/components/layout/MobileBottomBar";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://seferihisartaksi.com"),
   title: "Seferihisar Taksi 0554 115 44 22 | 7/24 Hızlı ve Güvenli Taksi Hizmeti",
   description: "Seferihisar, Sığacık ve çevresinde hızlı, güvenli ve ekonomik taksi hizmeti. 7/24 taksi çağırmak için hemen arayın.",
   keywords: ["seferihisar taksi", "seferihisar taxi", "sığacık taksi", "seferihisar 7/24 taksi", "izmir havalimanı transfer seferihisar"],
+  openGraph: {
+    title: "Seferihisar Taksi | 7/24 Hızlı ve Güvenli Taksi Hizmeti",
+    description: "Seferihisar, Sığacık ve çevresinde hızlı, güvenli ve ekonomik taksi hizmeti.",
+    url: "https://seferihisartaksi.com",
+    siteName: "Seferihisar Taksi",
+    images: [
+      {
+        url: "/seferihisar-bg.png",
+        width: 1200,
+        height: 630,
+        alt: "Seferihisar Taksi",
+      },
+    ],
+    locale: "tr_TR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Seferihisar Taksi | 7/24 Hızlı ve Güvenli Taksi Hizmeti",
+    description: "Seferihisar, Sığacık ve çevresinde hızlı, güvenli ve ekonomik taksi hizmeti.",
+    images: ["/seferihisar-bg.png"],
+  },
 };
 
 export default function RootLayout({
