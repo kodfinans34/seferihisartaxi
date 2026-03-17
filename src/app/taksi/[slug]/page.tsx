@@ -29,9 +29,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const baseKeyword = region.type === "ilce" ? `${region.name} taksi` : `${region.parent} ${region.name} taksi`;
 
     return {
-        title: `${region.name} Taksi | 7/24 Hızlı Taksi Çağır`,
+        title: `${region.name} Taksi | ${region.uniqueSellingPoint || '7/24 Hızlı ve Güvenilir Taksi Hizmeti'}`,
         description: region.description,
-        keywords: [baseKeyword, `${region.name} nöbetçi taksi`, `${region.name} en yakın taksi`, `${region.name} taksi numarası`],
+        keywords: [baseKeyword, `${region.name} gece taksi`, `${region.name} acil taksi`, `${region.name} en yakın taksi durağı`],
     };
 }
 
@@ -46,8 +46,29 @@ export default async function RegionTaxiPage({ params }: Props) {
     const prefix = region.type === "mahalle" && region.parent ? `${region.parent} ` : "";
     const locationName = `${prefix}${region.name}`;
 
+    // Generate FAQ Schema
+    const faqSchema = region.faqs && region.faqs.length > 0 ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": region.faqs.map(faq => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.answer
+            }
+        }))
+    } : null;
+
     return (
         <div className="min-h-screen bg-gray-50 pt-10 pb-20">
+            {faqSchema && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+                />
+            )}
+
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Hero Card */}
@@ -59,9 +80,15 @@ export default async function RegionTaxiPage({ params }: Props) {
                         {locationName} Bölgesinde Aktif
                     </div>
 
-                    <h1 className="text-4xl md:text-5xl font-bold text-secondary mb-6 leading-tight">
+                    <h1 className="text-4xl md:text-5xl font-bold text-secondary mb-4 leading-tight">
                         {locationName} <span className="text-primary">Taksi</span> Hizmeti
                     </h1>
+
+                    {region.uniqueSellingPoint && (
+                        <h2 className="text-xl md:text-2xl text-gray-800 font-medium mb-6">
+                            {region.uniqueSellingPoint}
+                        </h2>
+                    )}
 
                     <p className="text-lg text-gray-700 mb-8 leading-relaxed max-w-2xl">
                         {region.description} {locationName} ve çevresinde bulunduğunuz konuma en kısa sürede
@@ -73,6 +100,7 @@ export default async function RegionTaxiPage({ params }: Props) {
                         <WhatsAppButton className="flex-1 text-lg" />
                     </div>
 
+                    {/* Features Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="bg-gray-50/80 p-6 rounded-2xl flex flex-col items-center text-center border border-gray-100 transition-colors hover:border-primary/30">
                             <Clock className="w-10 h-10 text-primary mb-4" />
@@ -92,8 +120,23 @@ export default async function RegionTaxiPage({ params }: Props) {
                     </div>
                 </div>
 
-                {/* Content Section */}
-                <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100 p-8 md:p-12 text-center max-w-4xl mx-auto mb-12">
+                {/* Popular Destinations for Unique Content */}
+                {region.popularDestinations && region.popularDestinations.length > 0 && (
+                    <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100 p-8 md:p-12 mb-8">
+                        <h2 className="text-2xl font-bold text-secondary mb-6">{locationName} Popüler Duraklar</h2>
+                        <div className="grid gap-3 sm:grid-cols-2">
+                            {region.popularDestinations.map((dest, idx) => (
+                                <div key={idx} className="flex items-center gap-3 bg-gray-50 p-4 rounded-xl text-gray-700 font-medium">
+                                    <MapPin className="w-5 h-5 text-primary shrink-0" />
+                                    <span>{dest}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {/* Review Section */}
+                <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100 p-8 md:p-12 text-center max-w-4xl mx-auto mb-8">
                     <div className="w-16 h-16 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
                         <Star className="w-8 h-8 fill-blue-500" />
                     </div>
@@ -105,6 +148,21 @@ export default async function RegionTaxiPage({ params }: Props) {
                         "{locationName} bölgesinde ne zaman taksiye ihtiyacım olsa hemen geliyorlar. Çok kibar ve hızlı bir hizmet. Herkese tavsiye ederim."
                     </p>
                 </div>
+
+                {/* FAQ Section for Rich Snippets */}
+                {region.faqs && region.faqs.length > 0 && (
+                    <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100 p-8 md:p-12 mb-12">
+                        <h2 className="text-2xl font-bold text-secondary mb-8">{locationName} Hakkında Sıkça Sorulan Sorular</h2>
+                        <div className="space-y-4">
+                            {region.faqs.map((faq, idx) => (
+                                <div key={idx} className="bg-gray-50 rounded-xl p-5 border border-gray-100">
+                                    <h3 className="text-lg font-bold text-secondary mb-2">{faq.question}</h3>
+                                    <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
 
                 {/* Internal SEO Links */}
                 <div className="mt-12 bg-white rounded-3xl p-6 md:p-10 shadow-sm border border-gray-100">

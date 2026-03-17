@@ -126,6 +126,79 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* SEO & Keywords Discovery Section */}
+      <section className="py-16 bg-white border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-secondary mb-4">Seferihisar ve Çevresinde 7/24 Yanınızdayız</h2>
+            <p className="text-gray-600 max-w-3xl mx-auto font-medium">
+              İster acil bir taksi ihtiyacı, ister planlı bir havalimanı transferi olsun. Şehrin her noktasından bizi hemen arayabilirsiniz.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            {/* Local SEO Targets */}
+            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+              <h3 className="text-xl font-bold text-secondary mb-4 flex items-center gap-2">
+                <MapPin className="text-primary w-5 h-5" />
+                Popüler Duraklar
+              </h3>
+              <ul className="space-y-3">
+                <li><Link href="/seferihisar-taksi" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Seferihisar Merkez Taksi</Link></li>
+                <li><Link href="/sigacik-taksi" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Sığacık Taksi</Link></li>
+                <li><Link href="/urkmez-taksi" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Ürkmez Taksi</Link></li>
+                <li><Link href="/taksi/seferihisar-doganbey-taksi" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Doğanbey Taksi</Link></li>
+                <li><Link href="/taksi/seferihisar-camiikebir-mahallesi-taksi" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Camikebir Taksi</Link></li>
+                <li><Link href="/taksi/seferihisar-tepecik-mahallesi-taksi" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Tepecik Taksi</Link></li>
+              </ul>
+            </div>
+
+            {/* Action Targets */}
+            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+              <h3 className="text-xl font-bold text-secondary mb-4 flex items-center gap-2">
+                <Clock className="text-primary w-5 h-5" />
+                Hızlı Hizmet
+              </h3>
+              <ul className="space-y-3">
+                <li className="text-gray-600 font-medium text-sm">Seferihisar Acil Taksi</li>
+                <li className="text-gray-600 font-medium text-sm">Seferihisar Gece Taksi</li>
+                <li className="text-gray-600 font-medium text-sm">7/24 Hızlı Taksi Çağır</li>
+                <li className="text-gray-600 font-medium text-sm">Seferihisar VIP Taksi</li>
+                <li className="text-gray-600 font-medium text-sm">Seferihisar Uygun Fiyatlı Taksi</li>
+                <li className="text-gray-600 font-medium text-sm">İzmir Seferihisar Taksi Fiyatları</li>
+              </ul>
+            </div>
+
+            {/* Transfer Targets */}
+            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+              <h3 className="text-xl font-bold text-secondary mb-4 flex items-center gap-2">
+                <Plane className="text-primary w-5 h-5" />
+                Transfer & Turizm
+              </h3>
+              <ul className="space-y-3">
+                <li><Link href="/havalimani-transfer" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Seferihisar İzmir Havaalanı Transfer</Link></li>
+                <li><Link href="/havalimani-transfer" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Sığacık Havaalanı Transfer</Link></li>
+                <li className="text-gray-600 font-medium text-sm">Seferihisar Adnan Menderes Taksi</li>
+                <li className="text-gray-600 font-medium text-sm">Seferihisar Özel Transfer Hizmeti</li>
+                <li className="text-gray-600 font-medium text-sm">Sığacık Liman Taksi</li>
+                <li className="text-gray-600 font-medium text-sm">Seferihisar Havaalanı Transfer Ücreti</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+            <a href="tel:+905541154422" className="w-full sm:w-auto px-8 py-4 bg-primary text-secondary font-bold rounded-xl shadow-lg hover:bg-primary-hover transition-all text-center">
+              Hemen Taksi Seferihisar
+            </a>
+            <a href="https://wa.me/905541154422" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-8 py-4 bg-[#25D366] text-white font-bold rounded-xl shadow-lg hover:bg-[#20bd5a] transition-all text-center">
+              WhatsApp'tan Çağır
+            </a>
+          </div>
+
+        </div>
+      </section>
+
     </div>
   );
 }
