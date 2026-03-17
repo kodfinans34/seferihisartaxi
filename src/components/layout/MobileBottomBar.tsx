@@ -22,13 +22,22 @@ export const MobileBottomBar = () => {
 
                     if (item.isPrimary) {
                         return (
-                            <a
-                                key={index}
-                                href={item.href}
-                                className="flex flex-col items-center justify-center w-16 h-16 bg-primary text-secondary rounded-full -mt-8 shadow-lg border-4 border-white transform transition-transform active:scale-95"
-                            >
-                                {item.icon}
-                            </a>
+                            <div key={index} className="relative flex flex-col items-center">
+                                {/* Animated Taxi Logo */}
+                                <div className="absolute -top-14 pointer-events-none select-none">
+                                    <img
+                                        src="/taxi-mobile.png"
+                                        alt="Seferihisar Taksi"
+                                        className="w-16 h-auto animate-taxi-mobile drop-shadow-lg"
+                                    />
+                                </div>
+                                <a
+                                    href={item.href}
+                                    className="flex flex-col items-center justify-center w-16 h-16 bg-primary text-secondary rounded-full -mt-8 shadow-lg border-4 border-white transform transition-transform active:scale-95 relative z-10"
+                                >
+                                    {item.icon}
+                                </a>
+                            </div>
                         );
                     }
 

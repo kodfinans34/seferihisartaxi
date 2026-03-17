@@ -19,3 +19,19 @@
     font-family: var(--font-inter), sans-serif;
   }
 }
+
+@keyframes taxi-drive {
+  0% { transform: translateX(-4px) rotate(-1deg); }
+  50% { transform: translateX(4px) rotate(1deg); }
+  100% { transform: translateX(-4px) rotate(-1deg); }
+}
+
+@keyframes taxi-vibrate {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-1.5px); }
+  100% { transform: translateY(0); }
+}
+
+.animate-taxi-mobile {
+  animation: taxi-drive 3s ease-in-out infinite, taxi-vibrate 0.15s linear infinite;
+}
