@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
             userAgent: "*",
             allow: "/",
         },
-        sitemap: "https://seferihisartaksi.com/sitemap.xml",
+        sitemap: "https://seferihisartaxi.com/sitemap.xml",
     };
 }

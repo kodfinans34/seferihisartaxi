@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { regions } from "@/data/regions";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = "https://seferihisartaksi.com";
+    const baseUrl = "https://seferihisartaxi.com";
 
     // Base static routes
     const routes = [
