@@ -39,6 +39,9 @@ export const metadata: Metadata = {
     description: "Seferihisar, Sığacık ve çevresinde hızlı, güvenli ve ekonomik taksi hizmeti.",
     images: ["/seferihisar-bg.png"],
   },
+  verification: {
+    google: "ncU4f-jtgMcObso15TnXl3iw2DX7OlCyXZuBRH1xkYY",
+  },
 };
 
 export default function RootLayout({
