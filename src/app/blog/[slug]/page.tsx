@@ -23,10 +23,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         return { title: "Blog Bulunamadı" };
     }
 
+    const title = `${blog.title} | Seferihisar Taksi Rehberi`;
+    
     return {
-        title: `${blog.title} | Seferihisar Taksi Rehberi`,
+        title: title,
         description: blog.description,
         keywords: [blog.title, "seferihisar taksi rehberi", "izmir taksi blog", "sığacık ulaşım"],
+        openGraph: {
+            title: title,
+            description: blog.description,
+            url: `https://seferihisartaxi.com/blog/${blog.slug}`,
+            images: blog.image ? [blog.image] : undefined,
+            type: "article",
+        },
+        twitter: {
+            title: title,
+            description: blog.description,
+            images: blog.image ? [blog.image] : undefined,
+        }
     };
 }
 

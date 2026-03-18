@@ -30,10 +30,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const seo = seoData[region.slug];
     const baseKeyword = region.type === "ilce" ? `${region.name} taksi` : `${region.parent} ${region.name} taksi`;
 
+    const title = seo ? seo.title : `${region.name} Taksi | ${region.uniqueSellingPoint || '7/24 Hızlı ve Güvenilir Taksi Hizmeti'}`;
+    const description = seo ? seo.description : region.description;
+
     return {
-        title: seo ? seo.title : `${region.name} Taksi | ${region.uniqueSellingPoint || '7/24 Hızlı ve Güvenilir Taksi Hizmeti'}`,
-        description: seo ? seo.description : region.description,
+        title: title,
+        description: description,
         keywords: [baseKeyword, `${region.name} gece taksi`, `${region.name} acil taksi`, `${region.name} en yakın taksi durağı`],
+        openGraph: {
+            title: title,
+            description: description,
+            url: `https://seferihisartaxi.com/taksi/${region.slug}`,
+            type: "article",
+        },
+        twitter: {
+            title: title,
+            description: description,
+        }
     };
 }
 
