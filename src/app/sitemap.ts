@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { regions } from "@/data/regions";
+import { blogs } from "@/data/blogs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = "https://seferihisartaxi.com";
@@ -30,5 +31,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: region.type === "ilce" ? 0.9 : 0.7,
     }));
 
-    return [...routes, ...dynamicRoutes];
+    // Blog routes for SEO
+    const blogRoutes = blogs.map((blog) => ({
+        url: `${baseUrl}/blog/${blog.slug}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly" as const,
+        priority: 0.8,
+    }));
+
+    return [...routes, ...dynamicRoutes, ...blogRoutes];
 }

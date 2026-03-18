@@ -4,6 +4,28 @@ import { Clock, Plane, ShieldCheck, MapPin, ChevronRight, Star } from "lucide-re
 import { CallButton } from "@/components/ui/buttons";
 import { ServiceCard, AreaCard } from "@/components/ui/Cards";
 import { ReviewStars } from "@/components/ui/ReviewStars";
+import { blogs } from "@/data/blogs";
+
+const faqs = [
+  { q: "Seferihisar taksi açılış ücreti ne kadar?", a: "Taksi açılış ücretleri İzmir UKOME tarafından belirlenmekte olup güncel tarifeler anlık olarak taksimetre üzerinde yazmaktadır. Fiyatlarımız hakkında çağrı merkezimizden tahmini bilgi alabilirsiniz." },
+  { q: "Gece saatlerinde Sığacık veya Seferihisar'da taksi bulabilir miyim?", a: "Evet, duraklarımız 7/24 nöbetçi taksi mantığıyla çalışmaktadır. Gecenin ilerleyen saatlerinde bile bir telefonla bulunduğunuz konuma araç isteyebilirsiniz." },
+  { q: "İzmir Adnan Menderes Havalimanı (ADB) transferi yapıyor musunuz?", a: "Kesinlikle. İzmir Havalimanı ile Seferihisar Merkez, Sığacık, Özdere ve Ürkmez arasında şoförlü VIP veya standart taksi transfer hizmetimiz bulunmaktadır." },
+  { q: "Araçlarda evcil hayvan taşıma prosedürünüz nedir?", a: "Evcil dostlarınızla seyahat etmeniz bizim için sorun değildir. Lütfen aracı çağırırken kedi/köpek kafesi olduğunu veya kılıf gerektiğini belirtiniz." },
+  { q: "Uzak mesafeler (Çeşme, Kuşadası, Efes) için sabit ücret mi var taksimetre mi?", a: "Yasalar gereği taksimetre açılması zorunludur. Ancak uzak mesafeler için yola çıkmadan önce size ortalama bir ücret hesaplaması yapılarak ön bilgilendirme sunulur." }
+];
+
+const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.a
+        }
+    }))
+};
 
 export default function Home() {
   return (
@@ -196,6 +218,64 @@ export default function Home() {
             </a>
           </div>
 
+        </div>
+      </section>
+
+      {/* Latest Blog Posts Section */}
+      <section className="py-20 bg-gray-50 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-4">Ulaşım ve Taksi Rehberi</h2>
+              <p className="text-gray-600 font-medium max-w-2xl">Bölgeye seyahat etmeden önce mutlaka okumanız gereken faydalı içeriklerimiz.</p>
+            </div>
+            <Link href="/sitemap.xml" className="text-primary font-bold hover:text-primary-hover flex items-center">
+              Tüm Makaleler <ChevronRight className="w-5 h-5 ml-1" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {blogs.slice(0, 6).map((blog) => (
+              <Link href={`/blog/${blog.slug}`} key={blog.slug} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-primary/50 transition-all flex flex-col h-full group">
+                <div className="text-sm text-primary font-bold mb-3">{blog.date}</div>
+                <h3 className="text-xl font-bold text-secondary mb-3 group-hover:text-primary transition-colors">{blog.title}</h3>
+                <p className="text-gray-600 line-clamp-3 flex-grow">{blog.description}</p>
+                <div className="mt-6 flex items-center text-primary font-semibold text-sm">
+                  Devamını Oku <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 bg-white border-t border-gray-100">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-4">Sıkça Sorulan Sorular</h2>
+            <p className="text-gray-600 font-medium">Bize ulaşmadan önce en çok merak edilenlere buradan göz atabilirsiniz.</p>
+          </div>
+          
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+          />
+
+          <div className="space-y-4">
+            {faqs.map((faq, idx) => (
+              <details key={idx} className="group bg-gray-50 rounded-2xl border border-gray-100 [&_summary::-webkit-details-marker]:hidden">
+                <summary className="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-secondary text-lg">
+                  <span>{faq.q}</span>
+                  <span className="transition group-open:rotate-180 text-primary">
+                    <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                  </span>
+                </summary>
+                <div className="text-gray-600 px-6 pb-6 leading-relaxed">
+                  {faq.a}
+                </div>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
 

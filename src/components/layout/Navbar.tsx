@@ -119,15 +119,8 @@ export const Navbar = () => {
                             {isEnglish && link.name === "Anasayfa" ? "Home" : link.name}
                         </Link>
                     ))}
-                    <div className="border-t border-gray-100 my-4 pt-4">
-                        <Link
-                            href={isEnglish ? "/" : "/en"}
-                            onClick={() => setIsOpen(false)}
-                            className="flex items-center justify-center gap-2 block px-4 py-3 text-lg font-bold text-gray-700 bg-gray-50 border border-gray-100 hover:bg-gray-100 rounded-xl transition-colors"
-                        >
-                            <Globe className="w-5 h-5" />
-                            {isEnglish ? "Türkçe Versiyona Geç" : "Switch to English"}
-                        </Link>
+                    <div className="border-t border-gray-100 my-4 pt-4 lg:hidden">
+                        {/* We removed the redundant EN/TR switch here per user request. */}
                     </div>
                     <a
                         href="tel:+905541154422"
