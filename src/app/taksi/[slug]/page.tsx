@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { regions } from "@/data/regions";
+import { seoData } from "@/data/seoContent";
 import { CallButton, WhatsAppButton } from "@/components/ui/buttons";
 import { MapPin, Clock, ShieldCheck, Star } from "lucide-react";
 import { ReviewStars } from "@/components/ui/ReviewStars";
@@ -26,11 +27,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         return { title: "Bulunamadı" };
     }
 
+    const seo = seoData[region.slug];
     const baseKeyword = region.type === "ilce" ? `${region.name} taksi` : `${region.parent} ${region.name} taksi`;
 
     return {
-        title: `${region.name} Taksi | ${region.uniqueSellingPoint || '7/24 Hızlı ve Güvenilir Taksi Hizmeti'}`,
-        description: region.description,
+        title: seo ? seo.title : `${region.name} Taksi | ${region.uniqueSellingPoint || '7/24 Hızlı ve Güvenilir Taksi Hizmeti'}`,
+        description: seo ? seo.description : region.description,
         keywords: [baseKeyword, `${region.name} gece taksi`, `${region.name} acil taksi`, `${region.name} en yakın taksi durağı`],
     };
 }
@@ -45,6 +47,7 @@ export default async function RegionTaxiPage({ params }: Props) {
 
     const prefix = region.type === "mahalle" && region.parent ? `${region.parent} ` : "";
     const locationName = `${prefix}${region.name}`;
+    const seo = seoData[region.slug];
 
     // Generate FAQ Schema
     const faqSchema = region.faqs && region.faqs.length > 0 ? {
@@ -81,7 +84,7 @@ export default async function RegionTaxiPage({ params }: Props) {
                     </div>
 
                     <h1 className="text-4xl md:text-5xl font-bold text-secondary mb-4 leading-tight">
-                        {locationName} <span className="text-primary">Taksi</span> Hizmeti
+                        {seo ? seo.h1 : <>{locationName} <span className="text-primary">Taksi</span> Hizmeti</>}
                     </h1>
 
                     {region.uniqueSellingPoint && (
@@ -91,8 +94,7 @@ export default async function RegionTaxiPage({ params }: Props) {
                     )}
 
                     <p className="text-lg text-gray-700 mb-8 leading-relaxed max-w-2xl">
-                        {region.description} {locationName} ve çevresinde bulunduğunuz konuma en kısa sürede
-                        ulaşarak sizi gitmek istediğiniz yere güvenle ulaştırıyoruz.
+                        {seo ? seo.intro : `${region.description} ${locationName} ve çevresinde bulunduğunuz konuma en kısa sürede ulaşarak sizi gitmek istediğiniz yere güvenle ulaştırıyoruz.`}
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 mb-12">
@@ -100,24 +102,39 @@ export default async function RegionTaxiPage({ params }: Props) {
                         <WhatsAppButton className="flex-1 text-lg" />
                     </div>
 
-                    {/* Features Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="bg-gray-50/80 p-6 rounded-2xl flex flex-col items-center text-center border border-gray-100 transition-colors hover:border-primary/30">
-                            <Clock className="w-10 h-10 text-primary mb-4" />
-                            <h3 className="font-bold text-lg mb-2 text-secondary">7/24 Kesintisiz</h3>
-                            <p className="text-gray-600 text-sm">{locationName} için gece gündüz nöbetçi araçlarımız hazır.</p>
+                    {/* Features Grid Unique */}
+                    {seo ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {seo.features.map((f: any, idx: number) => (
+                                <div key={idx} className="bg-gray-50/80 p-6 rounded-2xl flex flex-col items-center text-center border border-gray-100 transition-colors hover:border-primary/30">
+                                    {f.icon === 'clock' && <Clock className="w-10 h-10 text-primary mb-4" />}
+                                    {f.icon === 'shield' && <ShieldCheck className="w-10 h-10 text-primary mb-4" />}
+                                    {f.icon === 'map' && <MapPin className="w-10 h-10 text-primary mb-4" />}
+                                    {f.icon === 'star' && <Star className="w-10 h-10 text-primary mb-4" />}
+                                    <h3 className="font-bold text-lg mb-2 text-secondary">{f.title}</h3>
+                                    <p className="text-gray-600 text-sm">{f.text}</p>
+                                </div>
+                            ))}
                         </div>
-                        <div className="bg-gray-50/80 p-6 rounded-2xl flex flex-col items-center text-center border border-gray-100 transition-colors hover:border-primary/30">
-                            <MapPin className="w-10 h-10 text-primary mb-4" />
-                            <h3 className="font-bold text-lg mb-2 text-secondary">Hızlı Ulaşım</h3>
-                            <p className="text-gray-600 text-sm">Konumunuzu gönderin, en yakın aracımız dakikalar içinde gelsin.</p>
+                    ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div className="bg-gray-50/80 p-6 rounded-2xl flex flex-col items-center text-center border border-gray-100 transition-colors hover:border-primary/30">
+                                <Clock className="w-10 h-10 text-primary mb-4" />
+                                <h3 className="font-bold text-lg mb-2 text-secondary">7/24 Kesintisiz</h3>
+                                <p className="text-gray-600 text-sm">{locationName} için gece gündüz nöbetçi araçlarımız hazır.</p>
+                            </div>
+                            <div className="bg-gray-50/80 p-6 rounded-2xl flex flex-col items-center text-center border border-gray-100 transition-colors hover:border-primary/30">
+                                <MapPin className="w-10 h-10 text-primary mb-4" />
+                                <h3 className="font-bold text-lg mb-2 text-secondary">Hızlı Ulaşım</h3>
+                                <p className="text-gray-600 text-sm">Konumunuzu gönderin, en yakın aracımız dakikalar içinde gelsin.</p>
+                            </div>
+                            <div className="bg-gray-50/80 p-6 rounded-2xl flex flex-col items-center text-center border border-gray-100 transition-colors hover:border-primary/30">
+                                <ShieldCheck className="w-10 h-10 text-primary mb-4" />
+                                <h3 className="font-bold text-lg mb-2 text-secondary">Güvenli Seyahat</h3>
+                                <p className="text-gray-600 text-sm">Düzenli bakımlı araçlar ve profesyonel şoför kadrosu.</p>
+                            </div>
                         </div>
-                        <div className="bg-gray-50/80 p-6 rounded-2xl flex flex-col items-center text-center border border-gray-100 transition-colors hover:border-primary/30">
-                            <ShieldCheck className="w-10 h-10 text-primary mb-4" />
-                            <h3 className="font-bold text-lg mb-2 text-secondary">Güvenli Seyahat</h3>
-                            <p className="text-gray-600 text-sm">Düzenli bakımlı araçlar ve profesyonel şoför kadrosu.</p>
-                        </div>
-                    </div>
+                    )}
                 </div>
 
                 {/* Popular Destinations for Unique Content */}
@@ -135,19 +152,34 @@ export default async function RegionTaxiPage({ params }: Props) {
                     </div>
                 )}
 
-                {/* Review Section */}
-                <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100 p-8 md:p-12 text-center max-w-4xl mx-auto mb-8">
-                    <div className="w-16 h-16 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <Star className="w-8 h-8 fill-blue-500" />
+                {/* Review Section Unique */}
+                {seo ? (
+                    <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100 p-8 md:p-12 text-center max-w-4xl mx-auto mb-8">
+                        <div className="w-16 h-16 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <Star className="w-8 h-8 fill-blue-500" />
+                        </div>
+                        <h2 className="text-3xl font-bold text-secondary mb-4">{seo.review.name} - Müşteri Yorumu</h2>
+                        <div className="flex justify-center mb-6">
+                            <ReviewStars rating={5.0} />
+                        </div>
+                        <p className="text-xl text-gray-700 italic mb-8">
+                            "{seo.review.text}"
+                        </p>
                     </div>
-                    <h2 className="text-3xl font-bold text-secondary mb-4">{locationName} Müşteri Yorumları</h2>
-                    <div className="flex justify-center mb-6">
-                        <ReviewStars rating={5.0} />
+                ) : (
+                    <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100 p-8 md:p-12 text-center max-w-4xl mx-auto mb-8">
+                        <div className="w-16 h-16 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <Star className="w-8 h-8 fill-blue-500" />
+                        </div>
+                        <h2 className="text-3xl font-bold text-secondary mb-4">{locationName} Müşteri Yorumları</h2>
+                        <div className="flex justify-center mb-6">
+                            <ReviewStars rating={5.0} />
+                        </div>
+                        <p className="text-xl text-gray-700 italic mb-8">
+                            "{locationName} bölgesinde ne zaman taksiye ihtiyacım olsa hemen geliyorlar. Çok kibar ve hızlı bir hizmet. Herkese tavsiye ederim."
+                        </p>
                     </div>
-                    <p className="text-xl text-gray-700 italic mb-8">
-                        "{locationName} bölgesinde ne zaman taksiye ihtiyacım olsa hemen geliyorlar. Çok kibar ve hızlı bir hizmet. Herkese tavsiye ederim."
-                    </p>
-                </div>
+                )}
 
                 {/* FAQ Section for Rich Snippets */}
                 {region.faqs && region.faqs.length > 0 && (
