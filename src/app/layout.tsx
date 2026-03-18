@@ -24,10 +24,10 @@ export const metadata: Metadata = {
     siteName: "Seferihisar Taksi",
     images: [
       {
-        url: "/seferihisar-bg.png",
-        width: 1200,
-        height: 630,
-        alt: "Seferihisar Taksi",
+        url: "https://seferihisartaxi.com/seo-resmi.jpg",
+        width: 800,
+        height: 1200,
+        alt: "Seferihisar Taksi Hizmeti",
       },
     ],
     locale: "tr_TR",
@@ -37,7 +37,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Seferihisar Taksi | 7/24 Hızlı ve Güvenli Taksi Hizmeti",
     description: "Seferihisar, Sığacık ve çevresinde hızlı, güvenli ve ekonomik taksi hizmeti.",
-    images: ["/seferihisar-bg.png"],
+    images: ["https://seferihisartaxi.com/seo-resmi.jpg"],
+  },
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/icon.svg', type: 'image/svg+xml' }
+    ],
+    apple: '/apple-icon.png',
   },
   verification: {
     google: "ncU4f-jtgMcObso15TnXl3iw2DX7OlCyXZuBRH1xkYY",
