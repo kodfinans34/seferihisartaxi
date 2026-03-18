@@ -4,40 +4,47 @@ import { useState, useEffect } from "react";
 import { X, Download } from "lucide-react";
 
 export const InstallPrompt = () => {
-    const [isInstallable, setIsInstallable] = useState(false);
     const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        // Only show if user hasn't dismissed it before
         const hasDismissed = localStorage.getItem("installPromptDismissed");
         
-        // Listen for the beforeinstallprompt event (Android/Chrome)
+        let timer: NodeJS.Timeout;
+
         const handleBeforeInstallPrompt = (e: any) => {
             e.preventDefault();
             setDeferredPrompt(e);
             if (!hasDismissed) {
-                setIsInstallable(true);
                 setIsVisible(true);
+                // Auto hide after 3 seconds
+                timer = setTimeout(() => setIsVisible(false), 3000);
             }
         };
 
         window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
 
-        // Detect iOS (iOS doesn't fire beforeinstallprompt, we just show instruction)
-        const isIos = () => {
-            const userAgent = window.navigator.userAgent.toLowerCase();
-            return /iphone|ipad|ipod/.test(userAgent);
-        };
-        
+        const isIos = () => /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
         const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator as any).standalone;
 
         if (isIos() && !isInStandaloneMode() && !hasDismissed) {
             setIsVisible(true);
-            // On iOS we don't have deferredPrompt, we just have to tell them how.
+            timer = setTimeout(() => setIsVisible(false), 3000);
         }
 
-        return () => window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+        // Hide on scroll
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setIsVisible(false);
+            }
+        };
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+            window.removeEventListener("scroll", handleScroll);
+            if(timer) clearTimeout(timer);
+        };
     }, []);
 
     const handleInstallClick = async () => {
@@ -50,6 +57,7 @@ export const InstallPrompt = () => {
         const { outcome } = await deferredPrompt.userChoice;
         if (outcome === 'accepted') {
             setIsVisible(false);
+            localStorage.setItem("installPromptDismissed", "true");
         }
         setDeferredPrompt(null);
     };
@@ -62,14 +70,13 @@ export const InstallPrompt = () => {
     if (!isVisible) return null;
 
     return (
-        <div className="fixed top-0 left-0 right-0 z-[100] bg-primary text-secondary px-4 py-3 shadow-md border-b-2 border-primary-hover flex items-center justify-between font-medium">
+        <div className="fixed top-0 left-0 right-0 z-[100] bg-primary text-secondary px-4 py-3 shadow-md border-b-2 border-primary-hover flex items-center justify-between font-medium animate-in slide-in-from-top-10">
             <div className="flex items-center gap-3">
                 <div className="bg-white p-1.5 rounded-lg shadow-sm">
-                    {/* Simplified mini taxi icon just for the prompt */}
                     <Download className="w-5 h-5 text-secondary" />
                 </div>
-                <div className="text-sm leading-tight pr-2">
-                    <span className="font-bold">Taksi Uygulamamız</span>
+                <div className="text-xs leading-tight pr-2">
+                    <span className="font-bold text-sm">Taksi Uygulamamız</span>
                     <br />
                     <span>Daha hızlı erişim için ana ekrana ekleyin!</span>
                 </div>
