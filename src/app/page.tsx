@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, Plane, ShieldCheck, MapPin, ChevronRight, Star } from "lucide-react";
+import { Clock, Plane, ShieldCheck, MapPin, ChevronRight, Star, Quote, TrendingUp, Phone, MessageCircle } from "lucide-react";
 import { CallButton } from "@/components/ui/buttons";
 import { ServiceCard, AreaCard } from "@/components/ui/Cards";
 import { ReviewStars } from "@/components/ui/ReviewStars";
@@ -58,8 +58,8 @@ export default function Home() {
       <section className="bg-primary py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <h2 className="text-2xl font-bold text-secondary text-center md:text-left">
-              Seferihisar'da Taksi mi Lazım?
+            <h2 className="text-2xl font-bold text-secondary text-center md:text-left flex items-center gap-3">
+              <Phone className="w-8 h-8" /> Seferihisar'da Taksi mi Lazım?
             </h2>
             <a href="tel:+905541154422" className="bg-secondary text-white hover:bg-black font-bold text-xl px-8 py-4 rounded-xl shadow-lg transition-transform hover:scale-105 flex items-center gap-3">
               Hemen Çağır
@@ -69,8 +69,46 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Prime SEO Target Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+            <div className="w-full lg:w-1/2 relative h-[400px] lg:h-[550px] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group">
+              <Image src="/seferihisar-bg.png" alt="Seferihisar Taksi Nöbetçi Transfer" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              <div className="absolute bottom-8 left-8 right-8">
+                 <div className="inline-flex items-center gap-2 bg-white/95 backdrop-blur-md px-5 py-2.5 rounded-2xl shadow-lg font-bold text-secondary">
+                    <ShieldCheck className="w-6 h-6 text-green-500" /> Binlerce Mutlu Yolcu
+                 </div>
+              </div>
+            </div>
+            <div className="w-full lg:w-1/2 space-y-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-secondary font-bold text-sm">
+                <TrendingUp className="w-4 h-4 text-primary" /> Bölgenin En Güvenilir Turizm Taşımacılığı
+              </div>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-secondary leading-tight">
+                <span className="text-primary border-b-4 border-primary/30 pb-1">Seferihisar Taksi</span> İhtiyaçlarınız İçin Kesin Çözüm
+              </h2>
+              <div className="space-y-6 text-lg text-gray-600 font-medium leading-relaxed">
+                  <p>
+                    <strong>Seferihisar Taksi</strong> olarak yılların bize kattığı deneyimle Sığacık, İzmir Havalimanı (ADB), Akarca, Ürkmez ve çevre beldelere 7 gün 24 saat kesintisiz, lüks ve hızlı ulaşım sağlıyoruz. Amacımız sizi sadece bir lokasyondan diğerine götürmek değil; tamamen yepyeni, geniş bagajlı ve klimalı ticari araçlarımızla VIP standartlarında bir yolculuk deneyimi yaşatmaktır.
+                  </p>
+                  <p>
+                    Bulmaya çalıştığınız ister gecenin bir yarısı <em>acil nöbetçi bir taksi</em>, ister ailenizle birlikte güvenle yapacağınız bir tatil transferi, ister can dostunuz <em>evcil hayvanınızla (pet taksi)</em> yapacağınız kısa bir yolculuk olsun; bölgeyi ezbere bilen usta şoför kadromuzla bir telefon uzağınızdayız. Gönül rahatlığıyla seyahat edip asla fahiş bedeller ödemeden en adil <strong>Seferihisar Taksi ücretleriyle</strong> gideceğiniz yere ulaşırsınız.
+                  </p>
+              </div>
+              <div className="pt-4 flex flex-col sm:flex-row gap-4">
+                <a href="tel:+905541154422" className="bg-secondary text-white font-bold py-4 px-8 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-2xl hover:-translate-y-1 transition-all flex items-center justify-center gap-3 text-lg">
+                   <Phone className="w-5 h-5 text-primary" /> Hemen Ulaşın: 0554 115 44 22
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Features/Services Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-4">Neden Bizi Seçmelisiniz?</h2>
@@ -123,18 +161,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Reviews Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Reviews Section with Mobile Carousel */}
+      <section className="py-24 bg-secondary relative overflow-hidden">
+        {/* Subtle background patterns */}
+        <div className="absolute top-0 right-0 -translate-y-12 translate-x-1/3 w-96 h-96 bg-primary/20 rounded-full blur-3xl opacity-50"></div>
+        <div className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/4 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-3xl opacity-50"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <div className="w-16 h-16 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Star className="w-8 h-8 fill-blue-500" />
+            <div className="w-16 h-16 bg-primary/20 text-primary rounded-full flex items-center justify-center mx-auto mb-6 shadow-glow">
+              <Star className="w-8 h-8 fill-primary text-primary" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-4">Müşteri Yorumları</h2>
-            <p className="text-gray-600 font-medium">Sizlerin memnuniyeti bizim en büyük motivasyonumuz.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Sizden Gelen Müşteri Yorumları</h2>
+            <p className="text-gray-400 font-medium text-lg">Yüzlerce mutlu yolcumuzun arasına katılın. Sizlerin memnuniyeti bizim en büyük motivasyonumuz.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {/* Horizontal scroll on mobile, grid on desktop */}
+          <div className="flex overflow-x-auto lg:grid lg:grid-cols-3 gap-6 pb-8 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             {[
               { author: "Ayşe Y.", text: "Çok hızlı ve kibar bir hizmet. Şoför bey çok ilgiliydi, araç temiz ve konforluydu. Kesinlikle tavsiye ederim." },
               { author: "Burak K.", text: "İzmir Havalimanı transferi için kullandık. Uçağımız rötar yapmasına rağmen bizi bekleyip valizlerimize yardımcı oldular. Profesyonel çalışma." },
@@ -142,29 +185,33 @@ export default function Home() {
               { author: "Caner D.", text: "Gece geç saatte Ürkmez'den taksi bulabilir miyiz diye endişe ederken bizi hemen alıp evimize güvenle bıraktılar. Çok teşekkürler." },
               { author: "Zeynep A.", text: "Teos Antik Kenti dönüşü taksimiz anında geldi. Şoför abinin yöre hakkındaki sohbeti ve muhabbeti şahaneydi. Çok memnunuz." },
             ].map((review, idx) => (
-              <div key={idx} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 flex flex-col h-full hover:shadow-md transition-shadow">
-                <div className="flex justify-between items-center mb-4">
-                    <div className="font-bold text-secondary">{review.author}</div>
+              <div key={idx} className="min-w-[85vw] sm:min-w-[350px] lg:min-w-0 snap-center bg-white/5 backdrop-blur-lg rounded-[2rem] border border-white/10 p-8 flex flex-col h-full hover:bg-white/10 transition-colors">
+                <Quote className="w-10 h-10 text-primary/30 absolute top-6 right-6" />
+                <div className="flex justify-between items-center mb-6 relative z-10">
+                    <div className="font-bold text-white text-lg">{review.author}</div>
                     <ReviewStars rating={5.0} />
                 </div>
-                <p className="text-gray-600 italic flex-grow">"{review.text}"</p>
-                <div className="flex items-center gap-2 mt-4 text-xs font-bold text-gray-400">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" className="w-4 h-4 grayscale opacity-50" /> Google Yorumu
+                <p className="text-gray-300 italic flex-grow text-lg leading-relaxed relative z-10">"{review.text}"</p>
+                <div className="flex items-center gap-2 mt-6 text-xs font-bold text-gray-400 relative z-10">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" className="w-4 h-4 grayscale opacity-70" /> Google'da Doğrulanmış Yorum
                 </div>
               </div>
             ))}
             
             {/* Direct Google Review Button Box */}
-            <div className="bg-primary/10 rounded-2xl border-2 border-primary/20 p-8 flex flex-col items-center justify-center text-center h-full hover:bg-primary/20 transition-colors">
-                <h3 className="text-xl font-bold text-secondary mb-2">Siz Değerli Müşterimiz?</h3>
-                <p className="text-gray-600 mb-6 text-sm">Hizmetimizden memnun kaldınız mı? Bir dakikanızı ayırıp bizi değerlendirin.</p>
+            <div className="min-w-[85vw] sm:min-w-[350px] lg:min-w-0 snap-center bg-primary rounded-[2rem] border border-primary-hover p-8 flex flex-col items-center justify-center text-center h-full hover:bg-primary-hover transition-colors shadow-xl">
+                <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mb-4">
+                  <MessageCircle className="w-8 h-8 text-secondary" />
+                </div>
+                <h3 className="text-2xl font-bold text-secondary mb-3">Siz Değerli Müşterimiz?</h3>
+                <p className="text-secondary/80 mb-8 font-medium">Hizmetimizden memnun kaldınız mı? Bir dakikanızı ayırıp 5 yıldız vermek ister misiniz?</p>
                 <a
                   href="https://g.page/r/CXiz0i0fzzocEAE/review"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-primary text-secondary font-bold py-3 px-8 rounded-xl hover:bg-primary-hover transition-colors shadow-sm flex items-center gap-2"
+                  className="bg-secondary text-white font-bold py-4 px-8 rounded-xl hover:bg-black transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center gap-2 w-full justify-center"
                 >
-                  <Star className="w-5 h-5 fill-secondary" /> Yorum Bırakın
+                  <Star className="w-5 h-5 fill-primary text-primary" /> Yorum Bırakın
                 </a>
             </div>
           </div>
