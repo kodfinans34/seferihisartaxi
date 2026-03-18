@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
@@ -11,6 +11,13 @@ const inter = Inter({
 });
 
 import { MobileBottomBar } from "@/components/layout/MobileBottomBar";
+
+export const viewport: Viewport = {
+  themeColor: "#facc15",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://seferihisartaxi.com"),
@@ -61,6 +68,12 @@ export const metadata: Metadata = {
   verification: {
     google: "ncU4f-jtgMcObso15TnXl3iw2DX7OlCyXZuBRH1xkYY",
     yandex: "64396064fd2e5110",
+  },
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Seferi Taksi",
   },
 };
 
