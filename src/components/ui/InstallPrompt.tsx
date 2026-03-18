@@ -8,31 +8,31 @@ export const InstallPrompt = () => {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
+        // Eğer daha önce kapattıysa gösterme (Test için istersen bu satırı // ile kapatabilirsin)
         const hasDismissed = localStorage.getItem("installPromptDismissed");
         
         let timer: NodeJS.Timeout;
 
         const showPrompt = () => {
             setIsVisible(true);
-            // Hide exactly after 6 seconds, even if scrolling
             timer = setTimeout(() => setIsVisible(false), 6000);
         };
 
         const handleBeforeInstallPrompt = (e: any) => {
             e.preventDefault();
             setDeferredPrompt(e);
-            if (!hasDismissed) {
-                showPrompt();
-            }
         };
 
         window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
 
-        const isIos = () => /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
-        const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator as any).standalone;
+        // Uygulama yüklü mü kontrol et
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || ('standalone' in window.navigator && (window.navigator as any).standalone);
 
-        if (isIos() && !isInStandaloneMode() && !hasDismissed) {
-            showPrompt();
+        // Yüklü değilse ve önceden kapatılmadıysa kesinlikle göster (1 saniye gecikmeli)
+        if (!isStandalone && !hasDismissed) {
+            setTimeout(() => {
+                showPrompt();
+            }, 500);
         }
 
         return () => {
@@ -43,7 +43,7 @@ export const InstallPrompt = () => {
 
     const handleInstallClick = async () => {
         if (!deferredPrompt) {
-            alert("Ana ekrana eklemek için: Safari'de alttaki 'Paylaş' ikonuna tıklayıp 'Ana Ekrana Ekle' (Add to Home Screen) seçeneğini seçin.");
+            alert("Otomatik yükleme desteklenmiyor. Lütfen tarayıcınızın menüsünden (Paylaş veya Ayarlar) 'Ana Ekrana Ekle' seçeneğine tıklayın.");
             return;
         }
         
