@@ -64,28 +64,27 @@ export const InstallPrompt = () => {
     if (!isVisible) return null;
 
     return (
-        <div className="fixed top-24 right-0 md:top-32 md:right-4 z-[100] w-64 bg-primary text-secondary p-4 shadow-2xl rounded-l-2xl md:rounded-2xl border-l-4 border-y border-white md:border-4 flex flex-col font-medium animate-in slide-in-from-right-10 duration-500">
+        <div className="fixed top-24 right-0 md:top-32 md:right-4 z-[100] w-64 bg-primary text-secondary p-3 shadow-2xl rounded-l-2xl md:rounded-2xl border-l-4 border-y border-white md:border-4 flex flex-col font-medium animate-in slide-in-from-right-10 duration-500">
             <div className="flex justify-between items-start mb-2">
-                <div className="bg-white p-1.5 rounded-lg shadow-sm flex-shrink-0">
-                    <Download className="w-5 h-5 text-secondary" />
+                <div className="flex items-center gap-3">
+                    <img src="/app-icon-192.png" alt="Taksi" className="w-10 h-10 rounded-xl shadow-md border border-white/50" />
+                    <div className="flex flex-col">
+                        <span className="font-black text-base">Taksi</span>
+                        <span className="text-xs font-bold opacity-80">Ana ekrana ekle</span>
+                    </div>
                 </div>
                 <button 
                     onClick={handleClose}
-                    className="p-1 text-secondary/70 hover:text-black hover:bg-white/20 rounded-full transition-colors"
+                    className="p-1 text-secondary/70 hover:text-black hover:bg-white/50 rounded-full transition-colors"
                     aria-label="Kapat"
                 >
                     <X className="w-5 h-5" />
                 </button>
             </div>
             
-            <div className="text-sm leading-tight mb-3">
-                <span className="font-extrabold text-base block mb-1">Taksi Uygulamamız</span>
-                <span>Ana ekrana ekleyin, tek tıkla taksiye ulaşın!</span>
-            </div>
-            
             <button 
                 onClick={handleInstallClick}
-                className="w-full bg-secondary text-white text-sm font-bold py-2 rounded-xl hover:bg-black transition-colors shadow-lg"
+                className="w-full bg-secondary text-white text-sm font-bold py-2 mt-1 rounded-xl hover:bg-black transition-colors shadow-lg"
             >
                 Hemen Ekle
             </button>
