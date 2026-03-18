@@ -13,6 +13,7 @@ const inter = Inter({
 import { MobileBottomBar } from "@/components/layout/MobileBottomBar";
 import { InstallPrompt } from "@/components/ui/InstallPrompt";
 import { CookieConsent } from "@/components/ui/CookieConsent";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
 export const viewport: Viewport = {
   themeColor: "#facc15",
@@ -152,6 +153,7 @@ export default function RootLayout({
         />
         <InstallPrompt />
         <CookieConsent />
+        <ScrollToTop />
         <Navbar />
         <main className="flex-grow pt-20">
           {children}
