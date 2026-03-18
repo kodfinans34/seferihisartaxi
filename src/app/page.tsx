@@ -58,12 +58,12 @@ export default function Home() {
       <section className="bg-primary py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <h2 className="text-2xl font-bold text-secondary text-center md:text-left flex items-center gap-3">
-              <Phone className="w-8 h-8" /> Seferihisar'da Taksi mi Lazım?
+            <h2 className="text-xl sm:text-2xl font-bold text-secondary text-center md:text-left flex flex-col sm:flex-row items-center gap-3">
+              <Phone className="w-6 h-6 sm:w-8 sm:h-8" /> Seferihisar'da Taksi mi Lazım?
             </h2>
-            <a href="tel:+905541154422" className="bg-secondary text-white hover:bg-black font-bold text-xl px-8 py-4 rounded-xl shadow-lg transition-transform hover:scale-105 flex items-center gap-3">
+            <a href="tel:+905541154422" className="w-full md:w-auto justify-center bg-secondary text-white hover:bg-black font-bold text-lg sm:text-xl px-6 sm:px-8 py-4 rounded-xl shadow-lg transition-transform hover:scale-105 flex items-center gap-3">
               Hemen Çağır
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
           </div>
         </div>
@@ -97,9 +97,10 @@ export default function Home() {
                     Bulmaya çalıştığınız ister gecenin bir yarısı <em>acil nöbetçi bir taksi</em>, ister ailenizle birlikte güvenle yapacağınız bir tatil transferi, ister can dostunuz <em>evcil hayvanınızla (pet taksi)</em> yapacağınız kısa bir yolculuk olsun; bölgeyi ezbere bilen usta şoför kadromuzla bir telefon uzağınızdayız. Gönül rahatlığıyla seyahat edip asla fahiş bedeller ödemeden en adil <strong>Seferihisar Taksi ücretleriyle</strong> gideceğiniz yere ulaşırsınız.
                   </p>
               </div>
-              <div className="pt-4 flex flex-col sm:flex-row gap-4">
-                <a href="tel:+905541154422" className="bg-secondary text-white font-bold py-4 px-8 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-2xl hover:-translate-y-1 transition-all flex items-center justify-center gap-3 text-lg">
-                   <Phone className="w-5 h-5 text-primary" /> Hemen Ulaşın: 0554 115 44 22
+              <div className="pt-4 flex flex-col sm:flex-row gap-4 w-full">
+                <a href="tel:+905541154422" className="w-full sm:w-auto bg-secondary text-white font-bold py-4 px-4 sm:px-8 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-2xl hover:-translate-y-1 transition-all flex items-center justify-center gap-2 sm:gap-3 text-base sm:text-lg">
+                   <Phone className="w-5 h-5 flex-shrink-0 text-primary" /> 
+                   <span className="whitespace-nowrap">Hemen Ulaşın: 0554 115 44 22</span>
                 </a>
               </div>
             </div>
