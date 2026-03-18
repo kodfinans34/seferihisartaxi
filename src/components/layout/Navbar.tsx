@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Phone } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Menu, X, Phone, Globe } from "lucide-react";
 import { AnimatedLogo } from "@/components/ui/AnimatedLogo";
 
 const NAV_LINKS = [
@@ -17,6 +18,8 @@ const NAV_LINKS = [
 export const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const pathname = usePathname();
+    const isEnglish = pathname === "/en";
 
     // Handle scroll effect for glassmorphism
     useEffect(() => {
@@ -39,7 +42,7 @@ export const Navbar = () => {
 
                     {/* Logo Section */}
                     <div className="flex-shrink-0 flex items-center gap-2 sm:gap-3">
-                        <Link href="/" className="flex items-center gap-2 xl:gap-3 group">
+                        <Link href={isEnglish ? "/en" : "/"} className="flex items-center gap-2 xl:gap-3 group">
                             <AnimatedLogo />
                             <div className="text-lg sm:text-xl xl:text-2xl font-bold tracking-tight text-secondary group-hover:text-black transition-colors whitespace-nowrap">
                                 Seferihisar <span className="text-primary group-hover:text-primary-hover">Taksi</span>
@@ -56,11 +59,20 @@ export const Navbar = () => {
                                     href={link.href}
                                     className="relative text-secondary font-medium px-1 text-sm xl:text-base py-1 transition-colors hover:text-primary group whitespace-nowrap"
                                 >
-                                    {link.name}
+                                    {isEnglish && link.name === "Anasayfa" ? "Home" : link.name}
                                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                                 </Link>
                             ))}
                         </div>
+
+                        <Link
+                            href={isEnglish ? "/" : "/en"}
+                            className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-full border border-gray-200 text-gray-700 hover:text-primary hover:border-primary transition-all font-bold text-sm bg-gray-50/50 shadow-sm"
+                            title={isEnglish ? "Türkçe" : "English"}
+                        >
+                            <Globe className="w-4 h-4" />
+                            {isEnglish ? "TR" : "EN"}
+                        </Link>
 
                         <a
                             href="tel:+905541154422"
@@ -72,7 +84,14 @@ export const Navbar = () => {
                     </div>
 
                     {/* Mobile Menu Button */}
-                    <div className="lg:hidden flex items-center">
+                    <div className="lg:hidden flex items-center gap-3">
+                        <Link
+                            href={isEnglish ? "/" : "/en"}
+                            className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-200 text-gray-700 font-bold text-sm bg-gray-50 shadow-sm"
+                        >
+                            <Globe className="w-4 h-4" />
+                            {isEnglish ? "TR" : "EN"}
+                        </Link>
                         <button
                             onClick={() => setIsOpen(!isOpen)}
                             className="p-2 rounded-xl text-secondary hover:bg-gray-100 transition-colors focus:outline-none"
@@ -97,9 +116,19 @@ export const Navbar = () => {
                             onClick={() => setIsOpen(false)}
                             className="block px-4 py-3 text-lg font-medium text-secondary hover:bg-primary/10 hover:text-primary rounded-xl transition-colors"
                         >
-                            {link.name}
+                            {isEnglish && link.name === "Anasayfa" ? "Home" : link.name}
                         </Link>
                     ))}
+                    <div className="border-t border-gray-100 my-4 pt-4">
+                        <Link
+                            href={isEnglish ? "/" : "/en"}
+                            onClick={() => setIsOpen(false)}
+                            className="flex items-center justify-center gap-2 block px-4 py-3 text-lg font-bold text-gray-700 bg-gray-50 border border-gray-100 hover:bg-gray-100 rounded-xl transition-colors"
+                        >
+                            <Globe className="w-5 h-5" />
+                            {isEnglish ? "Türkçe Versiyona Geç" : "Switch to English"}
+                        </Link>
+                    </div>
                     <a
                         href="tel:+905541154422"
                         className="flex items-center justify-center gap-3 w-full px-4 py-4 mt-6 text-lg font-bold text-secondary bg-primary hover:bg-primary-hover rounded-xl shadow-md transition-colors"

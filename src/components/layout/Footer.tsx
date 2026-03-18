@@ -77,7 +77,7 @@ export const Footer = () => {
                 </div>
                 <div className="mt-6 flex justify-center">
                     <a
-                        href="https://wa.me/905415041938?text=Sizinle%20%C3%A7al%C4%B1%C5%9Fmak%20istiyorum%2C%20Sekiz%20Yaz%C4%B1l%C4%B1m"
+                        href="https://wa.me/905415041938?text=Merhaba%20Sekiz%20Yaz%C4%B1l%C4%B1m.%20Seferihisar%20Taksi%20web%20projenizdeki%20modern%20tasar%C4%B1m%20ve%20h%C4%B1zl%C4%B1%20SEO%20altyap%C4%B1s%C4%B1%20dikkatimi%20%C3%A7ekti.%20Kendi%20projem%20i%C3%A7in%20de%20benzer%20kalitede%20bir%20teknolojik%20%C3%A7%C3%B6z%C3%BCm%20ar%C4%B1yorum%2C%20detaylar%C4%B1%20g%C3%B6r%C3%BC%C5%9Febilir%20miyiz%3F"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:opacity-75 hover:scale-105 transition-all duration-300"
