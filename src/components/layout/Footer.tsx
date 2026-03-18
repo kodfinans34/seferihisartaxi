@@ -93,7 +93,7 @@ export const Footer = () => {
                             display: "inline-block",
                         }}
                     >
-                        ✦ SEKİZ YAZILIM ✦
+                        TaksiPRO - SEKİZ YAZILIM
                     </a>
                 </div>
             </div>
