@@ -7,7 +7,7 @@ export const FooterSignature = () => {
     const [isDeleting, setIsDeleting] = useState(false);
     
     // The prefix that types out and deletes
-    const fullText = "TaksiPro - ";
+    const fullText = "TaksiPRO V2 - ";
     const typingSpeed = 120;
     const deletingSpeed = 80;
     const pauseTime = 2500; // How long it stays fully typed
