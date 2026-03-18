@@ -118,28 +118,28 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 pb-8 md:pb-12">
             {/* Image 1 */}
-            <div className="relative h-[300px] md:h-[400px] lg:h-[450px] rounded-[2rem] overflow-hidden shadow-2xl group border-4 border-white">
-              <Image src="/taxi-premium-1.png" alt="Seferihisar Lüks Taksi" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+            <Link href="/seferihisar-taksi" className="relative h-[300px] md:h-[400px] lg:h-[450px] rounded-[2rem] overflow-hidden shadow-2xl group border-4 border-white block cursor-pointer">
+              <Image src="/taxi-premium-1.png" alt="Seferihisar Merkez Taksi Filosu ve 7/24 Nöbetçi Taksi" fill className="object-cover group-hover:scale-110 transition-transform duration-700" title="Seferihisar Taksi Filomuz" />
               <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
               <div className="absolute bottom-6 left-6 right-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                 <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl text-white">
-                  <h3 className="font-bold text-2xl mb-1 text-primary">VIP & Standart Araçlar</h3>
-                  <p className="text-sm md:text-base text-gray-200 font-medium">Her türlü ulaşım ihtiyacınıza uygun geniş bagajlı seçenekler.</p>
+                  <h3 className="font-bold text-2xl mb-1 text-primary">Ticari Taksi Filomuz</h3>
+                  <p className="text-sm md:text-base text-gray-200 font-medium">İhtiyacınız anında, sıra beklemeden 7/24 kapınızda hazır bekleyen geniş araç ağımız.</p>
                 </div>
               </div>
-            </div>
+            </Link>
             
             {/* Image 2 */}
-            <div className="relative h-[300px] md:h-[400px] lg:h-[450px] rounded-[2rem] overflow-hidden shadow-2xl group border-4 border-white md:translate-y-12">
-              <Image src="/taxi-premium-2.png" alt="İzmir Havalimanı Konforlu Transfer Taksi" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+            <Link href="/havalimani-transfer" className="relative h-[300px] md:h-[400px] lg:h-[450px] rounded-[2rem] overflow-hidden shadow-2xl group border-4 border-white block cursor-pointer md:translate-y-12">
+              <Image src="/taxi-premium-2.png" alt="İzmir Adnan Menderes Havalimanı (ADB) VIP Taksi Transfer" fill className="object-cover group-hover:scale-110 transition-transform duration-700" title="İzmir Havalimanı Transfer Taksi" />
               <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
               <div className="absolute bottom-6 left-6 right-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                 <div className="bg-primary/95 backdrop-blur-md border border-primary-hover/50 p-5 rounded-2xl text-secondary shadow-lg">
-                  <h3 className="font-extrabold text-2xl mb-1">Havalimanı Transfer</h3>
-                  <p className="text-sm md:text-base font-semibold text-secondary/80">İzmir Adnan Menderes Havalimanı (ADB) gidiş ve gelişlerinizde güvenilir adresiniz.</p>
+                  <h3 className="font-extrabold text-2xl mb-1">Havalimanı & VIP Transfer</h3>
+                  <p className="text-sm md:text-base font-semibold text-secondary/80">İzmir Havalimanı ve Seferihisar arası konforlu, klimalı resmi ticari taksi güvencesi.</p>
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </section>

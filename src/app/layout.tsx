@@ -29,6 +29,18 @@ export const metadata: Metadata = {
         height: 1200,
         alt: "Seferihisar Taksi Hizmeti",
       },
+      {
+        url: "https://seferihisartaxi.com/taxi-premium-1.png",
+        width: 1200,
+        height: 800,
+        alt: "Seferihisar Merkez Ticari Taksi",
+      },
+      {
+        url: "https://seferihisartaxi.com/taxi-premium-2.png",
+        width: 1200,
+        height: 800,
+        alt: "Sığacık Havalimanı VIP Transfer",
+      },
     ],
     locale: "tr_TR",
     type: "website",
@@ -61,7 +73,12 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "TaxiService",
     name: "Seferihisar Taksi",
-    image: "https://seferihisartaxi.com/logo.png",
+    image: [
+      "https://seferihisartaxi.com/logo.png",
+      "https://seferihisartaxi.com/seo-resmi.jpeg",
+      "https://seferihisartaxi.com/taxi-premium-1.png",
+      "https://seferihisartaxi.com/taxi-premium-2.png"
+    ],
     "@id": "https://seferihisartaxi.com",
     url: "https://seferihisartaxi.com",
     telephone: "+905541154422",
