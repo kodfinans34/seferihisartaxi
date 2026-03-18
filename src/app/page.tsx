@@ -148,7 +148,7 @@ export default function Home() {
                 <li><Link href="/seferihisar-taksi" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Seferihisar Merkez Taksi</Link></li>
                 <li><Link href="/sigacik-taksi" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Sığacık Taksi</Link></li>
                 <li><Link href="/urkmez-taksi" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Ürkmez Taksi</Link></li>
-                <li><Link href="/taksi/seferihisar-doganbey-taksi" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Doğanbey Taksi</Link></li>
+                <li><Link href="/taksi/doganbey-sahil-taksi" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Doğanbey Taksi</Link></li>
                 <li><Link href="/taksi/seferihisar-camiikebir-mahallesi-taksi" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Camikebir Taksi</Link></li>
                 <li><Link href="/taksi/seferihisar-tepecik-mahallesi-taksi" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Tepecik Taksi</Link></li>
               </ul>
