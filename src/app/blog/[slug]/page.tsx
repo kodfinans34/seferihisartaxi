@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { blogs } from "@/data/blogs";
-import { ArrowLeft, Calendar, FileText } from "lucide-react";
+import { ArrowLeft, Calendar, FileText, Phone, MessageCircle } from "lucide-react";
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -95,9 +95,16 @@ export default async function BlogPostPage({ params }: Props) {
                     <div className="mt-12 pt-8 border-t border-gray-100 text-center bg-gray-50 rounded-2xl p-8">
                         <h3 className="text-xl font-bold text-secondary mb-4">Ulaşıma mı İhtiyacınız Var?</h3>
                         <p className="text-gray-600 mb-6">Seferihisar ve çevresinde profesyonel araç kiralama veya taksi ihtiyaçlarınız için anında rezervasyon yapabilirsiniz.</p>
-                        <a href="tel:+905541154422" className="inline-block bg-primary text-secondary font-bold px-8 py-3 rounded-xl hover:bg-primary-hover transition-colors shadow-sm">
-                            Hemen Bizi Arayın: 0554 115 44 22
-                        </a>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                            <a href="tel:+905541154422" className="w-full sm:w-auto flex items-center justify-center gap-2 bg-secondary text-white font-bold px-6 py-4 rounded-xl hover:bg-black transition-colors shadow-lg hover:-translate-y-1">
+                                <Phone className="w-5 h-5 text-primary" />
+                                <span>Ara: 0554 115 44 22</span>
+                            </a>
+                            <a href="https://wa.me/905541154422" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#25D366] text-white font-bold px-6 py-4 rounded-xl hover:bg-[#20bd5a] transition-colors shadow-lg hover:-translate-y-1">
+                                <MessageCircle className="w-5 h-5" />
+                                <span>WhatsApp İletişim</span>
+                            </a>
+                        </div>
                     </div>
                 </article>
             </div>
