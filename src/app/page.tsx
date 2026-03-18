@@ -108,6 +108,42 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Premium Fleet Images Section */}
+      <section className="py-16 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-4">Geniş ve Konforlu Araç Filomuz</h2>
+            <p className="text-gray-600 font-medium">Sizlere en iyi deneyimi sunmak için sürekli yenilenen, klimalı ve geniş iç hacimli modern araçlarımızla hizmetinizdeyiz.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 pb-8 md:pb-12">
+            {/* Image 1 */}
+            <div className="relative h-[300px] md:h-[400px] lg:h-[450px] rounded-[2rem] overflow-hidden shadow-2xl group border-4 border-white">
+              <Image src="/taxi-premium-1.png" alt="Seferihisar Lüks Taksi" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
+              <div className="absolute bottom-6 left-6 right-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl text-white">
+                  <h3 className="font-bold text-2xl mb-1 text-primary">VIP & Standart Araçlar</h3>
+                  <p className="text-sm md:text-base text-gray-200 font-medium">Her türlü ulaşım ihtiyacınıza uygun geniş bagajlı seçenekler.</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Image 2 */}
+            <div className="relative h-[300px] md:h-[400px] lg:h-[450px] rounded-[2rem] overflow-hidden shadow-2xl group border-4 border-white md:translate-y-12">
+              <Image src="/taxi-premium-2.png" alt="İzmir Havalimanı Konforlu Transfer Taksi" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
+              <div className="absolute bottom-6 left-6 right-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                <div className="bg-primary/95 backdrop-blur-md border border-primary-hover/50 p-5 rounded-2xl text-secondary shadow-lg">
+                  <h3 className="font-extrabold text-2xl mb-1">Havalimanı Transfer</h3>
+                  <p className="text-sm md:text-base font-semibold text-secondary/80">İzmir Adnan Menderes Havalimanı (ADB) gidiş ve gelişlerinizde güvenilir adresiniz.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Features/Services Section */}
       <section className="py-20 bg-gray-50 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
