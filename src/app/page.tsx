@@ -299,7 +299,7 @@ export default function Home() {
               <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-4">Ulaşım ve Taksi Rehberi</h2>
               <p className="text-gray-600 font-medium max-w-2xl">Bölgeye seyahat etmeden önce mutlaka okumanız gereken faydalı içeriklerimiz.</p>
             </div>
-            <Link href="/sitemap.xml" className="text-primary font-bold hover:text-primary-hover flex items-center">
+            <Link href="/blog" className="text-primary font-bold hover:text-primary-hover flex items-center">
               Tüm Makaleler <ChevronRight className="w-5 h-5 ml-1" />
             </Link>
           </div>

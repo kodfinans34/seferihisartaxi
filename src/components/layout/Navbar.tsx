@@ -120,7 +120,7 @@ export const Navbar = () => {
                         </Link>
                     ))}
                     <Link
-                        href="/#blog"
+                        href="/blog"
                         onClick={() => setIsOpen(false)}
                         className="block px-4 py-3 text-lg font-bold text-primary hover:bg-primary/10 rounded-xl transition-colors"
                     >
