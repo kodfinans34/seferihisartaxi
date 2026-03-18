@@ -80,6 +80,7 @@ export const Footer = () => {
                         href="https://wa.me/905415041938?text=Sizinle%20%C3%A7al%C4%B1%C5%9Fmak%20istiyorum%2C%20Sekiz%20Yaz%C4%B1l%C4%B1m"
                         target="_blank"
                         rel="noopener noreferrer"
+                        className="hover:opacity-75 hover:scale-105 transition-all duration-300"
                         style={{
                             background: "linear-gradient(135deg, #f59e0b, #ef4444)",
                             WebkitBackgroundClip: "text",
@@ -89,16 +90,7 @@ export const Footer = () => {
                             fontSize: "0.8rem",
                             letterSpacing: "0.15em",
                             textDecoration: "none",
-                            transition: "opacity 0.3s ease, transform 0.3s ease",
                             display: "inline-block",
-                        }}
-                        onMouseEnter={e => {
-                            (e.currentTarget as HTMLAnchorElement).style.opacity = "0.75";
-                            (e.currentTarget as HTMLAnchorElement).style.transform = "scale(1.05)";
-                        }}
-                        onMouseLeave={e => {
-                            (e.currentTarget as HTMLAnchorElement).style.opacity = "1";
-                            (e.currentTarget as HTMLAnchorElement).style.transform = "scale(1)";
                         }}
                     >
                         ✦ SEKİZ YAZILIM ✦
