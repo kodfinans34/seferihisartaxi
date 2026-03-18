@@ -1,3 +1,5 @@
+import { extraRegions } from "./extraRegions";
+
 export interface FAQ {
     question: string;
     answer: string;
@@ -281,4 +283,5 @@ export const regions: Region[] = [
             { question: "Çamtepe köyüne taksi çağırdığımda ücret nereden yazılmaya başlar?", answer: "Taksimetre, taksi bulunduğunuz noktadan yani araca bindiğiniz andan itibaren açılır." }
         ]
     },
+    ...extraRegions
 ];

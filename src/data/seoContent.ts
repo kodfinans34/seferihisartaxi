@@ -1,4 +1,7 @@
+import { extraSeoData } from "./extraSeo";
+
 export const seoData: Record<string, any> = {
+    ...extraSeoData,
     // İLÇELER
     "urla-taksi": {
         title: "Urla Taksi Durağı - 7/24 Urla Nöbetçi Taksi | Hızlı ve Acil",
