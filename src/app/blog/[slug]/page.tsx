@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { blogs } from "@/data/blogs";
 import { ArrowLeft, Calendar, FileText } from "lucide-react";
@@ -71,6 +72,17 @@ export default async function BlogPostPage({ params }: Props) {
                     <h1 className="text-3xl md:text-5xl font-bold text-secondary mb-8 leading-tight">
                         {blog.title}
                     </h1>
+
+                    {blog.image && (
+                        <div className="mb-10 rounded-2xl overflow-hidden shadow-lg border border-gray-100 relative h-64 md:h-[400px] w-full">
+                            <Image 
+                                src={blog.image} 
+                                alt={blog.title} 
+                                fill 
+                                className="object-cover hover:scale-105 transition-transform duration-700"
+                            />
+                        </div>
+                    )}
 
                     <div className="prose prose-lg prose-blue max-w-none text-gray-700 space-y-6">
                         {blog.content.map((paragraph, idx) => (

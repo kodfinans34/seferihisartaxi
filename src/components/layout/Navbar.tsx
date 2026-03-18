@@ -119,6 +119,13 @@ export const Navbar = () => {
                             {isEnglish && link.name === "Anasayfa" ? "Home" : link.name}
                         </Link>
                     ))}
+                    <Link
+                        href="/#blog"
+                        onClick={() => setIsOpen(false)}
+                        className="block px-4 py-3 text-lg font-bold text-primary hover:bg-primary/10 rounded-xl transition-colors"
+                    >
+                        {isEnglish ? "Travel Guide & Blog" : "Ulaşım Rehberi & Blog"}
+                    </Link>
                     <div className="border-t border-gray-100 my-4 pt-4 lg:hidden">
                         {/* We removed the redundant EN/TR switch here per user request. */}
                     </div>
