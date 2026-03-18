@@ -12,13 +12,17 @@ export const InstallPrompt = () => {
         
         let timer: NodeJS.Timeout;
 
+        const showPrompt = () => {
+            setIsVisible(true);
+            // Hide exactly after 6 seconds, even if scrolling
+            timer = setTimeout(() => setIsVisible(false), 6000);
+        };
+
         const handleBeforeInstallPrompt = (e: any) => {
             e.preventDefault();
             setDeferredPrompt(e);
             if (!hasDismissed) {
-                setIsVisible(true);
-                // Auto hide after 3 seconds
-                timer = setTimeout(() => setIsVisible(false), 3000);
+                showPrompt();
             }
         };
 
@@ -28,21 +32,11 @@ export const InstallPrompt = () => {
         const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator as any).standalone;
 
         if (isIos() && !isInStandaloneMode() && !hasDismissed) {
-            setIsVisible(true);
-            timer = setTimeout(() => setIsVisible(false), 3000);
+            showPrompt();
         }
-
-        // Hide on scroll
-        const handleScroll = () => {
-            if (window.scrollY > 50) {
-                setIsVisible(false);
-            }
-        };
-        window.addEventListener("scroll", handleScroll);
 
         return () => {
             window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
-            window.removeEventListener("scroll", handleScroll);
             if(timer) clearTimeout(timer);
         };
     }, []);
@@ -70,33 +64,31 @@ export const InstallPrompt = () => {
     if (!isVisible) return null;
 
     return (
-        <div className="fixed top-0 left-0 right-0 z-[100] bg-primary text-secondary px-4 py-3 shadow-md border-b-2 border-primary-hover flex items-center justify-between font-medium animate-in slide-in-from-top-10">
-            <div className="flex items-center gap-3">
-                <div className="bg-white p-1.5 rounded-lg shadow-sm">
+        <div className="fixed top-24 right-0 md:top-32 md:right-4 z-[100] w-64 bg-primary text-secondary p-4 shadow-2xl rounded-l-2xl md:rounded-2xl border-l-4 border-y border-white md:border-4 flex flex-col font-medium animate-in slide-in-from-right-10 duration-500">
+            <div className="flex justify-between items-start mb-2">
+                <div className="bg-white p-1.5 rounded-lg shadow-sm flex-shrink-0">
                     <Download className="w-5 h-5 text-secondary" />
                 </div>
-                <div className="text-xs leading-tight pr-2">
-                    <span className="font-bold text-sm">Taksi Uygulamamız</span>
-                    <br />
-                    <span>Daha hızlı erişim için ana ekrana ekleyin!</span>
-                </div>
-            </div>
-            
-            <div className="flex items-center gap-2 flex-shrink-0">
-                <button 
-                    onClick={handleInstallClick}
-                    className="bg-secondary text-white text-xs font-bold px-3 py-1.5 rounded-lg hover:bg-black transition-colors shadow-sm"
-                >
-                    Ekle
-                </button>
                 <button 
                     onClick={handleClose}
-                    className="p-1.5 text-secondary hover:bg-black/10 rounded-full transition-colors flex-shrink-0 ml-1"
+                    className="p-1 text-secondary/70 hover:text-black hover:bg-white/20 rounded-full transition-colors"
                     aria-label="Kapat"
                 >
                     <X className="w-5 h-5" />
                 </button>
             </div>
+            
+            <div className="text-sm leading-tight mb-3">
+                <span className="font-extrabold text-base block mb-1">Taksi Uygulamamız</span>
+                <span>Ana ekrana ekleyin, tek tıkla taksiye ulaşın!</span>
+            </div>
+            
+            <button 
+                onClick={handleInstallClick}
+                className="w-full bg-secondary text-white text-sm font-bold py-2 rounded-xl hover:bg-black transition-colors shadow-lg"
+            >
+                Hemen Ekle
+            </button>
         </div>
     );
 };
