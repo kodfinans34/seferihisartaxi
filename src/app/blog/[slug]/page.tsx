@@ -59,8 +59,9 @@ export default async function BlogPostPage({ params }: Props) {
             />
 
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-                <Link href="/" className="inline-flex items-center gap-2 text-primary hover:text-primary-hover font-medium mb-8 transition-colors">
-                    <ArrowLeft className="w-5 h-5" /> Anasayfaya Dön
+                <Link href="/" className="inline-flex items-center gap-2 bg-white hover:bg-primary group text-secondary hover:text-white font-bold px-6 py-3.5 rounded-2xl shadow-sm border border-gray-100 min-w-[200px] justify-center mb-8 transition-all hover:-translate-y-1 hover:shadow-md">
+                    <ArrowLeft className="w-5 h-5 text-primary group-hover:text-white transition-colors" /> 
+                    <span>Anasayfaya Dön</span>
                 </Link>
 
                 <article className="bg-white rounded-[2rem] shadow-sm border border-gray-100 p-8 md:p-12">
