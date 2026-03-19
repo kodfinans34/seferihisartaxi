@@ -81,15 +81,15 @@ export default function Home() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-            <div className="w-full lg:w-1/2 relative mx-auto aspect-square max-w-[640px] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group">
+            <a href="tel:+905541154422" className="block w-full lg:w-1/2 relative mx-auto aspect-square max-w-[640px] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group cursor-pointer">
               <Image src="/seferihisar-bg.png" alt="Seferihisar Taksi Nöbetçi Transfer" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-              <div className="absolute bottom-8 left-8 right-8">
+              <div className="absolute top-8 left-8 right-8 flex justify-center lg:justify-start">
                  <div className="inline-flex items-center gap-2 bg-white/95 backdrop-blur-md px-5 py-2.5 rounded-2xl shadow-lg font-bold text-secondary">
                     <ShieldCheck className="w-6 h-6 text-green-500" /> Binlerce Mutlu Yolcu
                  </div>
               </div>
-            </div>
+            </a>
             <div className="w-full lg:w-1/2 space-y-8">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-secondary font-bold text-sm">
                 <TrendingUp className="w-4 h-4 text-primary" /> Bölgenin En Güvenilir Turizm Taşımacılığı
