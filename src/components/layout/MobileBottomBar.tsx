@@ -48,7 +48,7 @@ export const MobileBottomBar = () => {
                                 href={item.href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex flex-col items-center justify-center w-full h-full text-gray-500 hover:text-[#25D366] transition-colors"
+                                className="flex flex-col items-center justify-center w-full h-full text-[#25D366] hover:text-[#20bd5a] transition-colors"
                             >
                                 <div className="mb-1">{item.icon}</div>
                                 <span className="text-[10px] font-medium">{item.label}</span>

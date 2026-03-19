@@ -81,7 +81,7 @@ export default function Home() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-            <div className="w-full lg:w-1/2 relative h-[400px] lg:h-[550px] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group">
+            <div className="w-full lg:w-1/2 relative mx-auto aspect-square max-w-[640px] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group">
               <Image src="/seferihisar-bg.png" alt="Seferihisar Taksi Nöbetçi Transfer" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
               <div className="absolute bottom-8 left-8 right-8">
