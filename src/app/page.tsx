@@ -59,15 +59,19 @@ export default function Home() {
       <section className="bg-primary py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <h2 className="text-xl md:text-2xl font-black text-secondary text-center md:text-left flex flex-col sm:flex-row items-center gap-3">
-              <Phone className="w-6 h-6 sm:w-7 sm:h-7" /> Seferihisar'da Taksi mi Lazım?
-            </h2>
-            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto mt-4 md:mt-0">
+            <div className="flex flex-col gap-4 text-center md:text-left w-full md:w-auto">
+              <h2 className="text-xl md:text-2xl font-black text-secondary flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3">
+                <Phone className="w-6 h-6 sm:w-7 sm:h-7" /> Seferihisar'da Taksi mi Lazım?
+              </h2>
+              <div className="flex justify-center md:justify-start">
+                <SendLocationButton className="w-full sm:w-auto text-base sm:text-lg" />
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
               <a href="tel:+905541154422" className="w-full sm:w-auto justify-center bg-secondary text-white hover:bg-black font-bold text-base sm:text-lg px-6 py-3.5 rounded-xl shadow-lg transition-transform hover:scale-105 flex items-center gap-2">
                 Hemen Çağır
                 <ChevronRight className="w-5 h-5" />
               </a>
-              <SendLocationButton className="w-full sm:w-auto text-base sm:text-lg" />
             </div>
           </div>
         </div>
