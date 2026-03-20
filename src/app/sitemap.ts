@@ -16,6 +16,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         "/seferihisar-taksi",
         "/sigacik-taksi",
         "/urkmez-taksi",
+        "/yorumlar",
+        "/blog",
     ].map((route) => ({
         url: `${baseUrl}${route}`,
         lastModified: new Date(),
