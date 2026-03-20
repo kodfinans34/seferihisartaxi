@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Navigation } from "lucide-react";
+import { db } from "@/lib/firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 export const SendLocationButton = ({ className = "" }: { className?: string }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,12 +17,25 @@ export const SendLocationButton = ({ className = "" }: { className?: string }) =
     setIsLoading(true);
 
     navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setIsLoading(false);
+      async (position) => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
         const mapsUrl = `https://maps.google.com/?q=${lat},${lon}`;
         
+        // Log to Firestore (fire-and-forget)
+        try {
+          await addDoc(collection(db, "locationLogs"), {
+            timestamp: new Date().toISOString(),
+            lat,
+            lon,
+            mapsUrl,
+          });
+        } catch (err) {
+          console.error("Firestore log error:", err);
+        }
+
+        setIsLoading(false);
+
         const message = `Merhaba, bulunduğum bu konuma acil taksi alabilir miyim? Konum: ${mapsUrl}`;
         const whatsappUrl = `https://wa.me/905541154422?text=${encodeURIComponent(message)}`;
         
