@@ -330,12 +330,12 @@ export default function Home() {
                 Hızlı Hizmet
               </h3>
               <ul className="space-y-3">
-                <li className="text-gray-600 font-medium text-sm">Seferihisar Acil Taksi</li>
-                <li className="text-gray-600 font-medium text-sm">Seferihisar Gece Taksi</li>
-                <li className="text-gray-600 font-medium text-sm">7/24 Hızlı Taksi Çağır</li>
-                <li className="text-gray-600 font-medium text-sm">Seferihisar VIP Taksi</li>
-                <li className="text-gray-600 font-medium text-sm">Seferihisar Uygun Fiyatlı Taksi</li>
-                <li className="text-gray-600 font-medium text-sm">İzmir Seferihisar Taksi Fiyatları</li>
+                <li><Link href="/blog/seferihisar-gece-ve-acil-taksi-bulma-tuyolari" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Seferihisar Acil Taksi</Link></li>
+                <li><Link href="/blog/seferihisar-gece-ve-acil-taksi-bulma-tuyolari" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Seferihisar Gece Taksi</Link></li>
+                <li><Link href="/seferihisar-taksi" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">7/24 Hızlı Taksi Çağır</Link></li>
+                <li><Link href="/blog/seferihisardan-efes-ve-sirince-gunubirlik-taksi-turu" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Seferihisar VIP Taksi</Link></li>
+                <li><Link href="/blog/seferihisar-taksi-ucretleri-hesaplama-ve-tarife" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Seferihisar Uygun Fiyatlı Taksi</Link></li>
+                <li><Link href="/blog/seferihisar-taksi-ucretleri-hesaplama-ve-tarife" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">İzmir Seferihisar Taksi Fiyatları</Link></li>
               </ul>
             </div>
 
@@ -348,10 +348,10 @@ export default function Home() {
               <ul className="space-y-3">
                 <li><Link href="/havalimani-transfer" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Seferihisar İzmir Havaalanı Transfer</Link></li>
                 <li><Link href="/havalimani-transfer" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Sığacık Havaalanı Transfer</Link></li>
-                <li className="text-gray-600 font-medium text-sm">Seferihisar Adnan Menderes Taksi</li>
-                <li className="text-gray-600 font-medium text-sm">Seferihisar Özel Transfer Hizmeti</li>
-                <li className="text-gray-600 font-medium text-sm">Sığacık Liman Taksi</li>
-                <li className="text-gray-600 font-medium text-sm">Seferihisar Havaalanı Transfer Ücreti</li>
+                <li><Link href="/havalimani-transfer" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Seferihisar Adnan Menderes Taksi</Link></li>
+                <li><Link href="/blog/izmir-havalimani-seferihisar-ulasim-rehberi" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Seferihisar Özel Transfer Hizmeti</Link></li>
+                <li><Link href="/sigacik-taksi" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Sığacık Liman Taksi</Link></li>
+                <li><Link href="/blog/izmir-havalimani-seferihisar-ulasim-rehberi" className="text-gray-600 hover:text-primary transition-colors font-medium text-sm">Seferihisar Havaalanı Transfer Ücreti</Link></li>
               </ul>
             </div>
           </div>
