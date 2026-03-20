@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { Plane, CalendarCheck, MapPin } from "lucide-react";
 import { CallButton, WhatsAppButton } from "@/components/ui/buttons";
+import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 
 export const metadata: Metadata = {
     title: "İzmir Havalimanı Transfer | Seferihisar Taksi",
@@ -11,6 +12,10 @@ export const metadata: Metadata = {
 export default function AirportTransferPage() {
     return (
         <div className="min-h-screen bg-white py-20">
+            <BreadcrumbSchema items={[
+                { name: "Anasayfa", href: "/" },
+                { name: "Havalimanı Transfer", href: "/havalimani-transfer" }
+            ]} />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col lg:flex-row items-center gap-16">
                     <div className="flex-1 w-full bg-blue-50/50 p-8 md:p-12 rounded-3xl border border-blue-100 relative overflow-hidden">

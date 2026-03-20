@@ -128,6 +128,15 @@ export default function RootLayout({
     },
     areaServed: ["Seferihisar", "Sığacık", "Ürkmez", "Doğanbey", "İzmir Adnan Menderes Havalimanı"],
     priceRange: "₺₺",
+    sameAs: [
+      "https://g.page/r/CXiz0i0fzzocEAE",
+      "https://share.google/xWuGUnAEOpNTzRvb3"
+    ],
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      reviewCount: "134"
+    }
   };
 
   return (

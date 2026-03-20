@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 
 export const metadata: Metadata = {
     title: "Hakkımızda | Seferihisar Taksi",
@@ -8,6 +9,10 @@ export const metadata: Metadata = {
 export default function AboutPage() {
     return (
         <div className="min-h-screen bg-white py-20">
+            <BreadcrumbSchema items={[
+                { name: "Anasayfa", href: "/" },
+                { name: "Hakkımızda", href: "/hakkimizda" }
+            ]} />
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h1 className="text-4xl md:text-5xl font-bold text-secondary mb-8 text-center">Hakkımızda</h1>
 

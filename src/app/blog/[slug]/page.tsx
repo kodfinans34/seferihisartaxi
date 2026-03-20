@@ -4,6 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { blogs } from "@/data/blogs";
 import { ArrowLeft, Calendar, FileText, Phone, MessageCircle } from "lucide-react";
+import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -52,16 +53,31 @@ export default async function BlogPostPage({ params }: Props) {
         notFound();
     }
 
-    // Article Schema for Rich Snippets
-    const articleSchema = {
+    // BlogPosting Schema for Rich Snippets (Google Discover & Search)
+    const blogPostingSchema = {
         "@context": "https://schema.org",
-        "@type": "Article",
+        "@type": "BlogPosting",
         "headline": blog.title,
         "description": blog.description,
+        "image": blog.image ? `https://seferihisartaxi.com${blog.image}` : "https://seferihisartaxi.com/seo-resmi.jpeg",
         "datePublished": blog.date,
+        "dateModified": blog.date,
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": `https://seferihisartaxi.com/blog/${blog.slug}`
+        },
         "author": {
             "@type": "Organization",
-            "name": "Seferihisar Taksi"
+            "name": "Seferihisar Taksi",
+            "url": "https://seferihisartaxi.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Seferihisar Taksi",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://seferihisartaxi.com/logo.png"
+            }
         }
     };
 
@@ -69,8 +85,13 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="min-h-screen bg-gray-50 pt-10 pb-20">
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
             />
+            <BreadcrumbSchema items={[
+                { name: "Anasayfa", href: "/" },
+                { name: "Blog", href: "/blog" },
+                { name: blog.title, href: `/blog/${blog.slug}` }
+            ]} />
 
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
                 <Link href="/" className="inline-flex items-center gap-2 bg-white hover:bg-primary group text-secondary hover:text-white font-bold px-6 py-3.5 rounded-2xl shadow-sm border border-gray-100 min-w-[200px] justify-center mb-8 transition-all hover:-translate-y-1 hover:shadow-md">

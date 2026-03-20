@@ -6,6 +6,7 @@ import { seoData } from "@/data/seoContent";
 import { CallButton, WhatsAppButton } from "@/components/ui/buttons";
 import { MapPin, Clock, ShieldCheck, Star } from "lucide-react";
 import { ReviewStars } from "@/components/ui/ReviewStars";
+import { BreadcrumbSchema } from "@/components/seo/BreadcrumbSchema";
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -84,6 +85,11 @@ export default async function RegionTaxiPage({ params }: Props) {
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
                 />
             )}
+            <BreadcrumbSchema items={[
+                { name: "Anasayfa", href: "/" },
+                { name: "Hizmet Bölgeleri", href: "/hizmetlerimiz" },
+                { name: `${locationName} Taksi`, href: `/taksi/${region.slug}` }
+            ]} />
 
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 

@@ -102,7 +102,7 @@ export default function EnglishHome() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="group relative rounded-2xl overflow-hidden cursor-pointer">
-                <img src="/seferihisar-bg.png" alt="Seferihisar Taxi" className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110" />
+                <img src="/seferihisar-bgt.png" alt="Seferihisar Taxi" className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                 <div className="absolute bottom-6 left-6 text-white text-xl font-bold">Seferihisar Center</div>
             </div>

@@ -28,9 +28,48 @@ const faqSchema = {
     }))
 };
 
+const reviews = [
+  { author: "Ayşe Y.", text: "Çok hızlı ve kibar bir hizmet. Şoför bey çok ilgiliydi, araç temiz ve konforluydu. Kesinlikle tavsiye ederim." },
+  { author: "Burak K.", text: "İzmir Havalimanı transferi için kullandık. Uçağımız rötar yapmasına rağmen bizi bekleyip valizlerimize yardımcı oldular. Profesyonel çalışma." },
+  { author: "Elif M.", text: "Sığacık Marina'dan merkeze geçmek için aradık. 5 dakika içinde kapıdaydılar. Araç pırıl pırıl ve klimalıydı." },
+  { author: "Caner D.", text: "Gece geç saatte Ürkmez'den taksi bulabilir miyiz diye endişe ederken bizi hemen alıp evimize güvenle bıraktılar. Çok teşekkürler." },
+  { author: "Zeynep A.", text: "Teos Antik Kenti dönüşü taksimiz anında geldi. Şoför abinin yöre hakkındaki sohbeti ve muhabbeti şahaneydi. Çok memnunuz." },
+];
+
+const reviewSchema = {
+  "@context": "https://schema.org",
+  "@type": "TaxiService",
+  "name": "Seferihisar Taksi",
+  "url": "https://seferihisartaxi.com",
+  "telephone": "+905541154422",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "134",
+    "bestRating": "5"
+  },
+  "review": reviews.map(r => ({
+    "@type": "Review",
+    "author": {
+      "@type": "Person",
+      "name": r.author
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "5",
+      "bestRating": "5"
+    },
+    "reviewBody": r.text
+  }))
+};
+
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewSchema) }}
+      />
       {/* Hero Section */}
       <section className="relative bg-secondary text-white py-20 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-[url('/hero-bg.png')] bg-cover bg-center opacity-80 mix-blend-overlay"></div>
@@ -86,7 +125,7 @@ export default function Home() {
                  <ShieldCheck className="w-6 h-6 text-green-500" /> Binlerce Mutlu Yolcu
               </div>
               <a href="tel:+905541154422" className="block w-full relative aspect-square rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white group cursor-pointer">
-                <Image src="/seferihisar-bg.png" alt="Seferihisar Taksi Nöbetçi Transfer" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                <Image src="/seferihisar-bgt.png" alt="Seferihisar Taksi Nöbetçi Transfer" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
               </a>
             </div>
@@ -199,7 +238,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <AreaCard title="Seferihisar Merkez" href="/seferihisar-taksi" image="/seferihisar-bg.png" />
+            <AreaCard title="Seferihisar Merkez" href="/seferihisar-taksi" image="/seferihisar-bgt.png" />
             <AreaCard title="Sığacık Marina" href="/sigacik-taksi" image="/sigacik-bg.png" />
             <AreaCard title="Ürkmez Sahil" href="/urkmez-taksi" image="/urkmez-bg.png" />
           </div>
@@ -223,13 +262,7 @@ export default function Home() {
 
           {/* Horizontal scroll on mobile, grid on desktop */}
           <div className="flex overflow-x-auto lg:grid lg:grid-cols-3 gap-6 pb-8 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-            {[
-              { author: "Ayşe Y.", text: "Çok hızlı ve kibar bir hizmet. Şoför bey çok ilgiliydi, araç temiz ve konforluydu. Kesinlikle tavsiye ederim." },
-              { author: "Burak K.", text: "İzmir Havalimanı transferi için kullandık. Uçağımız rötar yapmasına rağmen bizi bekleyip valizlerimize yardımcı oldular. Profesyonel çalışma." },
-              { author: "Elif M.", text: "Sığacık Marina'dan merkeze geçmek için aradık. 5 dakika içinde kapıdaydılar. Araç pırıl pırıl ve klimalıydı." },
-              { author: "Caner D.", text: "Gece geç saatte Ürkmez'den taksi bulabilir miyiz diye endişe ederken bizi hemen alıp evimize güvenle bıraktılar. Çok teşekkürler." },
-              { author: "Zeynep A.", text: "Teos Antik Kenti dönüşü taksimiz anında geldi. Şoför abinin yöre hakkındaki sohbeti ve muhabbeti şahaneydi. Çok memnunuz." },
-            ].map((review, idx) => (
+            {reviews.map((review, idx) => (
               <div key={idx} className="min-w-[85vw] sm:min-w-[350px] lg:min-w-0 snap-center bg-white/5 backdrop-blur-lg rounded-[2rem] border border-white/10 p-8 flex flex-col h-full hover:bg-white/10 transition-colors">
                 <Quote className="w-10 h-10 text-primary/30 absolute top-6 right-6" />
                 <div className="flex justify-between items-center mb-6 relative z-10">
