@@ -3,11 +3,12 @@
 import { useState, useEffect } from "react";
 import { auth, db } from "@/lib/firebase";
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut, User } from "firebase/auth";
-import { collection, query, orderBy, getDocs, deleteDoc, doc, limit } from "firebase/firestore";
+import { collection, query, orderBy, getDocs, deleteDoc, doc, limit, addDoc, setDoc, getDoc } from "firebase/firestore";
 import {
     Star, MessageCircle, Flag, Copy, ExternalLink, MapPin, Clock,
     LogOut, Shield, Megaphone, Navigation, Trash2, RefreshCw,
-    CheckCircle, AlertTriangle, Monitor, Smartphone, Lock
+    CheckCircle, AlertTriangle, Monitor, Smartphone, Lock,
+    Eye, Save, Power, Wrench, ShieldAlert, MousePointerClick, Search
 } from "lucide-react";
 
 // ─── Reviews Data ───
@@ -275,52 +276,192 @@ function LocationLogsTab() {
 
 // ─── Tab: Google Ads ───
 function AdsTab() {
+    const [headline1, setHeadline1] = useState("Seferihisar Taksi");
+    const [headline2, setHeadline2] = useState("7/24 Hızlı Hizmet");
+    const [description, setDescription] = useState("Seferihisar, Sığacık, Ürkmez bölgesinde güvenilir taksi. Havalimanı transfer, VIP araç. Hemen arayın!");
+    const [displayUrl, setDisplayUrl] = useState("seferihisartaxi.com");
+    const [phone, setPhone] = useState("0554 115 44 22");
+    const [saved, setSaved] = useState(false);
+    const [showPreview, setShowPreview] = useState(false);
+
+    const saveAdDraft = async () => {
+        try {
+            await setDoc(doc(db, "adsDrafts", "current"), {
+                headline1, headline2, description, displayUrl, phone,
+                updatedAt: new Date().toISOString()
+            });
+            setSaved(true);
+            setTimeout(() => setSaved(false), 2000);
+        } catch (err) {
+            console.error("Save error:", err);
+        }
+    };
+
+    // Load saved draft
+    useEffect(() => {
+        const loadDraft = async () => {
+            try {
+                const snap = await getDoc(doc(db, "adsDrafts", "current"));
+                if (snap.exists()) {
+                    const d = snap.data();
+                    if (d.headline1) setHeadline1(d.headline1);
+                    if (d.headline2) setHeadline2(d.headline2);
+                    if (d.description) setDescription(d.description);
+                    if (d.displayUrl) setDisplayUrl(d.displayUrl);
+                    if (d.phone) setPhone(d.phone);
+                }
+            } catch (err) {
+                console.error("Load draft error:", err);
+            }
+        };
+        loadDraft();
+    }, []);
+
     return (
         <div className="space-y-4">
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
-                <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center">
-                        <Megaphone className="w-5 h-5 text-blue-400" />
+            {/* Quick Actions */}
+            <div className="grid grid-cols-2 gap-3">
+                <a
+                    href="https://ads.google.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-blue-500/10 border border-blue-500/20 rounded-2xl p-4 flex flex-col items-center gap-2 active:scale-95 transition-transform"
+                >
+                    <Megaphone className="w-6 h-6 text-blue-400" />
+                    <span className="text-white text-xs font-bold">Google Ads Aç</span>
+                </a>
+                <a
+                    href="https://ads.google.com/aw/overview"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-purple-500/10 border border-purple-500/20 rounded-2xl p-4 flex flex-col items-center gap-2 active:scale-95 transition-transform"
+                >
+                    <MousePointerClick className="w-6 h-6 text-purple-400" />
+                    <span className="text-white text-xs font-bold">Kampanyalar</span>
+                </a>
+            </div>
+
+            {/* Invalid Click Protection */}
+            <a
+                href="https://ads.google.com/aw/overview"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block bg-red-500/10 border border-red-500/30 rounded-2xl p-4 active:scale-95 transition-transform"
+            >
+                <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                        <ShieldAlert className="w-5 h-5 text-red-400" />
                     </div>
                     <div>
-                        <h3 className="text-white font-bold text-sm">Google Ads</h3>
-                        <p className="text-gray-500 text-xs">Kampanya ID: AW-18027028171</p>
+                        <h4 className="text-red-400 font-bold text-sm">Sahte Tıklama Koruma</h4>
+                        <p className="text-gray-500 text-xs mt-0.5">Google Ads geçersiz tıklama raporu</p>
+                    </div>
+                    <ExternalLink className="w-4 h-4 text-red-400/50 ml-auto" />
+                </div>
+            </a>
+
+            {/* Ad Builder */}
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+                <h3 className="text-white font-bold text-sm mb-4 flex items-center gap-2">
+                    <Wrench className="w-4 h-4 text-primary" />
+                    Reklam Oluşturucu
+                </h3>
+
+                <div className="space-y-3">
+                    <div>
+                        <label className="text-gray-400 text-xs font-bold mb-1 block">Başlık 1 (30 karakter)</label>
+                        <input
+                            value={headline1}
+                            onChange={(e) => setHeadline1(e.target.value.slice(0, 30))}
+                            className="w-full bg-white/10 border border-white/20 text-white rounded-xl px-4 py-3 text-sm placeholder:text-gray-600 focus:outline-none focus:border-primary"
+                            placeholder="Seferihisar Taksi"
+                        />
+                        <span className="text-gray-600 text-[10px] mt-1 block text-right">{headline1.length}/30</span>
+                    </div>
+                    <div>
+                        <label className="text-gray-400 text-xs font-bold mb-1 block">Başlık 2 (30 karakter)</label>
+                        <input
+                            value={headline2}
+                            onChange={(e) => setHeadline2(e.target.value.slice(0, 30))}
+                            className="w-full bg-white/10 border border-white/20 text-white rounded-xl px-4 py-3 text-sm placeholder:text-gray-600 focus:outline-none focus:border-primary"
+                            placeholder="7/24 Hızlı Hizmet"
+                        />
+                        <span className="text-gray-600 text-[10px] mt-1 block text-right">{headline2.length}/30</span>
+                    </div>
+                    <div>
+                        <label className="text-gray-400 text-xs font-bold mb-1 block">Açıklama (90 karakter)</label>
+                        <textarea
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value.slice(0, 90))}
+                            rows={2}
+                            className="w-full bg-white/10 border border-white/20 text-white rounded-xl px-4 py-3 text-sm placeholder:text-gray-600 focus:outline-none focus:border-primary resize-none"
+                            placeholder="Reklam açıklaması..."
+                        />
+                        <span className="text-gray-600 text-[10px] mt-1 block text-right">{description.length}/90</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                        <div>
+                            <label className="text-gray-400 text-xs font-bold mb-1 block">Görünen URL</label>
+                            <input
+                                value={displayUrl}
+                                onChange={(e) => setDisplayUrl(e.target.value)}
+                                className="w-full bg-white/10 border border-white/20 text-white rounded-xl px-3 py-3 text-xs placeholder:text-gray-600 focus:outline-none focus:border-primary"
+                            />
+                        </div>
+                        <div>
+                            <label className="text-gray-400 text-xs font-bold mb-1 block">Telefon</label>
+                            <input
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                className="w-full bg-white/10 border border-white/20 text-white rounded-xl px-3 py-3 text-xs placeholder:text-gray-600 focus:outline-none focus:border-primary"
+                            />
+                        </div>
                     </div>
                 </div>
-                <div className="space-y-3">
-                    <a
-                        href="https://ads.google.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 bg-blue-500 text-white rounded-xl py-4 font-bold text-sm active:scale-95 transition-transform"
+
+                {/* Action Buttons */}
+                <div className="flex gap-3 mt-4">
+                    <button
+                        onClick={() => setShowPreview(!showPreview)}
+                        className="flex-1 flex items-center justify-center gap-2 bg-white/10 text-white rounded-xl py-3 text-xs font-bold active:scale-95 transition-transform"
                     >
-                        <ExternalLink className="w-4 h-4" /> Google Ads Panelini Aç
-                    </a>
-                    <a
-                        href="https://ads.google.com/aw/campaigns"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 bg-white/10 text-white rounded-xl py-3 font-bold text-xs active:scale-95 transition-transform"
+                        <Eye className="w-4 h-4" /> {showPreview ? "Gizle" : "Önizleme"}
+                    </button>
+                    <button
+                        onClick={saveAdDraft}
+                        className={`flex-1 flex items-center justify-center gap-2 rounded-xl py-3 text-xs font-bold active:scale-95 transition-transform ${
+                            saved ? "bg-green-500 text-white" : "bg-primary text-secondary"
+                        }`}
                     >
-                        Kampanyaları Görüntüle
-                    </a>
-                    <a
-                        href="https://ads.google.com/aw/conversions"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 bg-white/10 text-white rounded-xl py-3 font-bold text-xs active:scale-95 transition-transform"
-                    >
-                        Dönüşüm İzleme
-                    </a>
+                        {saved ? <><CheckCircle className="w-4 h-4" /> Kaydedildi!</> : <><Save className="w-4 h-4" /> Kaydet</>}
+                    </button>
                 </div>
             </div>
 
+            {/* Google Preview */}
+            {showPreview && (
+                <div className="bg-white rounded-2xl p-4 border border-gray-200">
+                    <p className="text-xs text-gray-400 mb-2 flex items-center gap-1">
+                        <Search className="w-3 h-3" /> Google Arama Önizlemesi
+                    </p>
+                    <div className="border-l-4 border-transparent">
+                        <p className="text-xs text-green-700 font-medium">Sponsorlu · {displayUrl}</p>
+                        <h4 className="text-blue-700 font-bold text-base leading-snug mt-0.5">
+                            {headline1} | {headline2}
+                        </h4>
+                        <p className="text-gray-600 text-xs mt-1 leading-relaxed">{description}</p>
+                        <p className="text-green-700 text-xs mt-1 font-medium">📞 {phone}</p>
+                    </div>
+                </div>
+            )}
+
+            {/* Status */}
             <div className="bg-green-500/5 border border-green-500/20 rounded-2xl p-4">
-                <div className="flex items-center gap-2 mb-2">
+                <div className="flex items-center gap-2 mb-1">
                     <CheckCircle className="w-4 h-4 text-green-400" />
                     <span className="text-green-400 font-bold text-xs">Dönüşüm Kodu Aktif</span>
                 </div>
-                <p className="text-gray-500 text-xs">Google Ads dönüşüm izleme kodu sitenizde aktif olarak çalışmaktadır (layout.tsx).</p>
+                <p className="text-gray-500 text-xs">AW-18027028171 izleme kodu aktif</p>
             </div>
         </div>
     );
@@ -328,39 +469,104 @@ function AdsTab() {
 
 // ─── Tab: Security ───
 function SecurityTab() {
+    const [maintenance, setMaintenance] = useState(false);
+    const [mLoading, setMLoading] = useState(true);
+
+    // Load maintenance state from Firestore
+    useEffect(() => {
+        const loadState = async () => {
+            try {
+                const snap = await getDoc(doc(db, "settings", "maintenance"));
+                if (snap.exists()) {
+                    setMaintenance(snap.data().enabled ?? false);
+                }
+            } catch (err) {
+                console.error("Load maintenance error:", err);
+            }
+            setMLoading(false);
+        };
+        loadState();
+    }, []);
+
+    const toggleMaintenance = async () => {
+        const newVal = !maintenance;
+        setMaintenance(newVal);
+        try {
+            await setDoc(doc(db, "settings", "maintenance"), {
+                enabled: newVal,
+                updatedAt: new Date().toISOString()
+            });
+        } catch (err) {
+            console.error("Toggle error:", err);
+            setMaintenance(!newVal); // revert
+        }
+    };
+
     return (
         <div className="space-y-4">
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
-                <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-red-500/20 rounded-full flex items-center justify-center">
-                        <Shield className="w-5 h-5 text-red-400" />
+            {/* Maintenance Mode Toggle */}
+            <div className={`border rounded-2xl p-5 transition-colors ${
+                maintenance
+                    ? "bg-amber-500/10 border-amber-500/30"
+                    : "bg-white/5 border-white/10"
+            }`}>
+                <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                            maintenance ? "bg-amber-500/20" : "bg-green-500/20"
+                        }`}>
+                            {maintenance
+                                ? <Wrench className="w-5 h-5 text-amber-400" />
+                                : <Power className="w-5 h-5 text-green-400" />
+                            }
+                        </div>
+                        <div>
+                            <h3 className="text-white font-bold text-sm">Bakım Modu</h3>
+                            <p className="text-gray-500 text-xs">{maintenance ? "Site bakımda" : "Site aktif"}</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 className="text-white font-bold text-sm">Güvenlik Paneli</h3>
-                        <p className="text-gray-500 text-xs">Saldırı koruma ve site güvenliği</p>
-                    </div>
-                </div>
-
-                <div className="space-y-3">
-                    <a
-                        href="https://dash.cloudflare.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 bg-orange-500 text-white rounded-xl py-4 font-bold text-sm active:scale-95 transition-transform"
+                    <button
+                        onClick={toggleMaintenance}
+                        disabled={mLoading}
+                        className={`relative w-14 h-8 rounded-full transition-colors ${
+                            maintenance ? "bg-amber-500" : "bg-gray-600"
+                        }`}
                     >
-                        <Shield className="w-4 h-4" /> Cloudflare Paneli
-                    </a>
-                    <a
-                        href="https://vercel.com/dashboard"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 bg-white/10 text-white rounded-xl py-3 font-bold text-xs active:scale-95 transition-transform"
-                    >
-                        Vercel Dashboard
-                    </a>
+                        <div className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow-md transition-transform ${
+                            maintenance ? "translate-x-7" : "translate-x-1"
+                        }`} />
+                    </button>
                 </div>
+                {maintenance && (
+                    <p className="text-amber-400/80 text-xs bg-amber-500/10 rounded-xl p-3">
+                        ⚠️ Bakım modu aktif. Ziyaretçiler sitenize erişemez.
+                    </p>
+                )}
             </div>
 
+            {/* Quick Actions */}
+            <div className="grid grid-cols-2 gap-3">
+                <a
+                    href="https://dash.cloudflare.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-orange-500/10 border border-orange-500/20 rounded-2xl p-4 flex flex-col items-center gap-2 active:scale-95 transition-transform"
+                >
+                    <Shield className="w-6 h-6 text-orange-400" />
+                    <span className="text-white text-xs font-bold">Cloudflare</span>
+                </a>
+                <a
+                    href="https://vercel.com/dashboard"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col items-center gap-2 active:scale-95 transition-transform"
+                >
+                    <ExternalLink className="w-6 h-6 text-gray-400" />
+                    <span className="text-white text-xs font-bold">Vercel</span>
+                </a>
+            </div>
+
+            {/* Attack Mode Guide */}
             <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
                 <h4 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
                     <AlertTriangle className="w-4 h-4 text-amber-400" />
@@ -368,26 +574,25 @@ function SecurityTab() {
                 </h4>
                 <ol className="space-y-2 text-gray-400 text-xs leading-relaxed">
                     <li className="flex gap-2"><span className="text-primary font-bold">1.</span> Cloudflare panelini açın</li>
-                    <li className="flex gap-2"><span className="text-primary font-bold">2.</span> &quot;Under Attack Mode&quot; seçeneğini aktifleştirin</li>
+                    <li className="flex gap-2"><span className="text-primary font-bold">2.</span> &quot;Under Attack Mode&quot; aktifleştirin</li>
                     <li className="flex gap-2"><span className="text-primary font-bold">3.</span> Saldırı bitene kadar aktif tutun</li>
-                    <li className="flex gap-2"><span className="text-primary font-bold">4.</span> Ardından tekrar kapatın</li>
                 </ol>
             </div>
 
-            <div className="bg-green-500/5 border border-green-500/20 rounded-2xl p-4">
-                <div className="flex items-center gap-2 mb-2">
+            {/* Status Cards */}
+            <div className="space-y-2">
+                <div className="bg-green-500/5 border border-green-500/20 rounded-2xl p-3 flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-green-400" />
                     <span className="text-green-400 font-bold text-xs">SSL Sertifikası Aktif</span>
                 </div>
-                <p className="text-gray-500 text-xs">seferihisartaxi.com HTTPS ile korunmaktadır.</p>
-            </div>
-
-            <div className="bg-green-500/5 border border-green-500/20 rounded-2xl p-4">
-                <div className="flex items-center gap-2 mb-2">
+                <div className="bg-green-500/5 border border-green-500/20 rounded-2xl p-3 flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-green-400" />
                     <span className="text-green-400 font-bold text-xs">Firebase Auth Aktif</span>
                 </div>
-                <p className="text-gray-500 text-xs">Admin paneli Firebase Authentication ile korunmaktadır.</p>
+                <div className="bg-green-500/5 border border-green-500/20 rounded-2xl p-3 flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-400" />
+                    <span className="text-green-400 font-bold text-xs">HTTPS Koruması Aktif</span>
+                </div>
             </div>
         </div>
     );
