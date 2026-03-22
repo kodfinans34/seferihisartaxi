@@ -238,7 +238,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <AreaCard title="Seferihisar Merkez" href="/seferihisar-taksi" image="/seferihisar-bgt.png" />
+            <AreaCard title="Seferihisar Merkez" href="/seferihisar-taksi" image="/seferihisar-merkez-img.png" />
             <AreaCard title="Sığacık Marina" href="/sigacik-taksi" image="/sigacik-bg.png" />
             <AreaCard title="Ürkmez Sahil" href="/urkmez-taksi" image="/urkmez-bg.png" />
           </div>
