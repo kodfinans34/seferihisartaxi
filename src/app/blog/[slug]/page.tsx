@@ -30,6 +30,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: title,
         description: blog.description,
         keywords: [blog.title, "seferihisar taksi rehberi", "izmir taksi blog", "sığacık ulaşım"],
+        alternates: {
+            canonical: `https://seferihisartaxi.com/blog/${blog.slug}`
+        },
+        robots: {
+            index: true,
+            follow: true
+        },
         openGraph: {
             title: title,
             description: blog.description,

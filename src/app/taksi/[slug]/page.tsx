@@ -38,6 +38,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: title,
         description: description,
         keywords: [baseKeyword, `${region.name} gece taksi`, `${region.name} acil taksi`, `${region.name} en yakın taksi durağı`],
+        alternates: {
+            canonical: `https://seferihisartaxi.com/taksi/${region.slug}`
+        },
+        robots: {
+            index: true,
+            follow: true
+        },
         openGraph: {
             title: title,
             description: description,

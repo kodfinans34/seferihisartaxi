@@ -28,6 +28,20 @@ export const metadata: Metadata = {
   title: "Seferihisar Taksi 0554 115 44 22 | 7/24 Hızlı ve Güvenli Taksi Hizmeti",
   description: "Seferihisar, Sığacık ve çevresinde hızlı, güvenli ve ekonomik taksi hizmeti. 7/24 taksi çağırmak için hemen arayın.",
   keywords: ["seferihisar taksi", "seferihisar taxi", "sığacık taksi", "seferihisar 7/24 taksi", "izmir havalimanı transfer seferihisar"],
+  alternates: {
+    canonical: "https://seferihisartaxi.com",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
     title: "Seferihisar Taksi | 7/24 Hızlı ve Güvenli Taksi Hizmeti",
     description: "Seferihisar, Sığacık ve çevresinde hızlı, güvenli ve ekonomik taksi hizmeti.",
