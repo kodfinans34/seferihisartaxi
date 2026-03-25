@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, MapPin, Clock } from "lucide-react";
+import { Phone, MapPin, Clock, Star } from "lucide-react";
 import { regions } from "@/data/regions";
 import { FooterSignature } from "@/components/ui/FooterSignature";
 
@@ -53,11 +53,40 @@ export const Footer = () => {
                                 </div>
                                 <a href="tel:+905541154422" className="text-gray-300 hover:text-white font-medium transition-colors text-lg tracking-wide">0554 115 44 22</a>
                             </li>
-                            <li className="flex items-center gap-3">
+                            <li className="flex items-start gap-3">
                                 <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                                     <MapPin className="w-5 h-5 text-primary" />
                                 </div>
-                                <span className="text-gray-300">Seferihisar Merkez / İzmir</span>
+                                <div className="flex flex-col gap-3 w-full">
+                                    <a
+                                        href="https://maps.google.com/maps?q=Camikebir,%20Atat%C3%BCrk%20Cd.%20No:1,%2035460%20Seferihisar/%C4%B0zmir"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-gray-300 hover:text-white hover:underline transition-all duration-300 text-sm md:text-base leading-relaxed"
+                                    >
+                                        Camikebir, Atatürk Cd. No:1, 35460 Seferihisar/İzmir
+                                    </a>
+                                    <div className="w-full h-[120px] rounded-lg overflow-hidden border border-primary/20 shadow-lg">
+                                        <iframe
+                                            src="https://maps.google.com/maps?q=Camikebir,%20Atat%C3%BCrk%20Cd.%20No:1,%2035460%20Seferihisar/%C4%B0zmir&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+                                            width="100%"
+                                            height="100%"
+                                            style={{ border: 0 }}
+                                            allowFullScreen={false}
+                                            loading="lazy"
+                                            referrerPolicy="no-referrer-when-downgrade"
+                                        ></iframe>
+                                    </div>
+                                    <a
+                                        href="https://business.google.com/v/_/AKsrIN1UrZAI0CwWmJ-UEJKqyqUdq5wmx0WUaV9tTNwWKn6xaCpymTCpvxZW/ce9c/_?caid=23676082477&agid=&gclid=Cj0KCQjw7IjOBhDyARIsAFzrWQyxxd0cZWKaPfRpqvUbj3cY5aB6l4HWSV4eiI8zU8DjzbJRGWxiD5waAmA0EALw_wcB&gad_source=1&gad_campaignid=23671448543&gbraid=0AAAABDJ82ObtkYyl6lkRPMtcYO43XTqSX&gclid=Cj0KCQjw7IjOBhDyARIsAFzrWQyxxd0cZWKaPfRpqvUbj3cY5aB6l4HWSV4eiI8zU8DjzbJRGWxiD5waAmA0EALw_wcB"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center justify-center gap-2 mt-1 text-primary hover:text-white font-semibold text-sm bg-primary/10 hover:bg-primary/80 px-4 py-2 rounded-lg border border-primary/30 hover:border-primary transition-all duration-300 w-fit"
+                                    >
+                                        <Star className="w-4 h-4 fill-primary" />
+                                        Google Benim İşletmem
+                                    </a>
+                                </div>
                             </li>
                             <li className="flex items-center gap-3">
                                 <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
